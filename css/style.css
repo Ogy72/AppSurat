@@ -1,0 +1,29 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+}
+
+.menu{
+    border-bottom: 1.5px solid #ee1f1fef;
+}
+
+.header {
+    height: 55px;
+}
+
+.a-clr{
+    color: #dc3545 !important;
+    font-size: 16px;
+}
+
+.konten{
+    background-color: #162b45da;
+    height: 520px;
+}
+
+.table-scroll{
+    height: 400px;
+    width: 100%;
+	overflow-y: auto;
+}
