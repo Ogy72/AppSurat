@@ -1,5 +1,6 @@
 <?php
 include_once "controller/ManajemenSuratMasuk.php";
+include_once "controller/ManajemenSuratKeluar.php";
 include_once "controller/ManajemenAkun.php";
 
 class Antarmuka{
@@ -10,10 +11,6 @@ class Antarmuka{
 
     public function halamanAdmin(){
         include_once "view/HalamanAdmin.php";
-    }
-
-    public function halamanDirektur(){
-
     }
 
     public function menuSuratMasukAdmin(){
@@ -45,6 +42,13 @@ class Antarmuka{
         $data = $msum->mencariSuratMasuk($key);
         $instansi = $msum->melihatInstansi();
         include_once "view/FormSuratMasuk.php";
+    }
+
+    public function formSuratKeluar($form, $key){
+        $msuk = new ManajemenSuratKeluar();
+        $data = $msuk->mencariSuratKeluar($key);
+        $instansi = $msuk->melihatInstansi();
+        include_once "view/FormSuratKeluar.php";
     }
 
     public function formAkun($form, $key){

@@ -79,7 +79,35 @@
         <div class="row">
             <!-- isi Konten -->
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 konten" >
-            <h2 class="text-white font-weight-light mb-5 text-uppercase font-weight-bold">Menu Surat Keluar Admin</h2>
+            
+                <div class="row mt-3 mr-1 ml-1 mb-1">
+                    <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 pl-1">
+                        <h5 class="text-white font-weight-light text-uppercase font-weight-bold">Daftar Surat Keluar</h5>
+                    </div>
+                    <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 pl-5 pr-0">
+                        <form action="" method="post" class="form-inline pr-0 mr-0">
+                            <input type="text" name="key" class="form-control form-control-sm" placeholder="Masukkan Perihal">
+                            <input type="submit" name="search" value="Search" class="btn btn-success btn-sm ml-2">
+                            <a href="index.php?menu=FormSuratKeluar&form=input&key" class="btn btn-primary btn-sm ml-3">Input Surat Keluar</a>
+                        </form>
+                        
+                    </div>
+                </div>
+
+                <div class="row mt-2 mr-1 ml-1 mb-1">
+                <?php
+
+                    if(isset($_POST["key"])){
+                        $search = $_POST["key"];
+                    } else{
+                        $search = "";
+                    }
+
+                    $msuk = new ManajemenSuratKeluar();
+                    $msuk->melihatSuratKeluar($search);
+                ?>
+                </div>
+
             </div>
         </div>
 

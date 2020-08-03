@@ -24,6 +24,9 @@
                 case "FormSuratMasuk":
                     $ant->formSuratMasuk($_GET["form"], $_GET["key"]);
                     break;
+                case "FormSuratKeluar":
+                    $ant->formSuratKeluar($_GET["form"], $_GET["key"]);
+                    break;
                 case "FormAkun":
                     $ant->formAkun($_GET["form"], $_GET["key"]);
                     break;

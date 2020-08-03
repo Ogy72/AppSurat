@@ -1,7 +1,7 @@
 <?php
     $result = "";
     if(isset($_POST["action"])){
-        $msum = new ManajemenSuratMasuk();
+        $msuk = new ManajemenSuratKeluar();
         $action = $_POST["action"];
 
         /*error handle*/
@@ -19,13 +19,13 @@
        
         switch ($action){
             case "Simpan":
-                $result = $msum->inputSuratMasuk($_POST["no_surat"], $_POST["tgl_surat"], $_POST["tgl_diterima"], $_POST["perihal"], $_POST["sifat"], $_POST["kd_instansi"], $_FILES['berkas']['name'], $kd_instansi_new, $nm_instansi, $pic, $alamat, $_FILES['berkas']['tmp_name']);
+                $result = $msuk->inputSuratKeluar($_POST["no_surat"], $_POST["tgl_surat"], $_POST["sifat"], $_POST["perihal"], $_POST["kd_instansi"], $_FILES['berkas']['name'], $kd_instansi_new, $nm_instansi, $pic, $alamat, $_FILES['berkas']['tmp_name'], $_POST['id_user']);
                 break;
             case "Ubah":
-                $result = $msum->editSuratMasuk($_POST["no_surat"],$_POST["no_suratx"], $_POST["tgl_surat"], $_POST["tgl_diterima"], $_POST["perihal"], $_POST["sifat"], $_POST["kd_instansi"], $_FILES['berkas']['name'], $_POST['filex'], $kd_instansi_new, $nm_instansi, $pic, $alamat, $_FILES['berkas']['tmp_name']);
+                $result = $msuk->editSuratKeluar($_POST["no_surat"],$_POST["no_suratx"], $_POST["tgl_surat"], $_POST["tgl_diterima"], $_POST["perihal"], $_POST["sifat"], $_POST["kd_instansi"], $_FILES['berkas']['name'], $_POST['filex'], $kd_instansi_new, $nm_instansi, $pic, $alamat, $_FILES['berkas']['tmp_name']);
                 break;
             case "Hapus":
-                $msum->hapusSuratMasuk($_POST["no_surat"], $_POST["berkas"]);
+                $msuk->hapusSuratKeluar($_POST["no_surat"], $_POST["berkas"]);
                 break;
             default:
                 echo "<h4 class='text-white'>Logika Error</h4>";
@@ -92,10 +92,10 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="a-clr nav-link  active" href="index.php?menu=SuratMasukAdmin">Surat Masuk</a>
+                            <a class="a-clr nav-link" href="index.php?menu=SuratMasukAdmin">Surat Masuk</a>
                         </li>
                         <li class="nav-item">
-                            <a class="a-clr nav-link" href="index.php?menu=SuratKeluarAdmin">Surat Keluar</a>
+                            <a class="a-clr nav-link active" href="index.php?menu=SuratKeluarAdmin">Surat Keluar</a>
                         </li>
                         <li class="nav-item">
                             <a class="a-clr nav-link" href="index.php?menu=ManajemenAkun">Manajemen Akun</a>
@@ -182,7 +182,7 @@
                                             <input class='form-check-input' type='checkbox' id='uploadFile'>
                                             <label class='form-check-label'>Upload Surat Baru</label>
                                         </div>
-                                        <input type='file' name='berkas' class='form-control-file border border-light mt-2' id='file' disabled>
+                                        <input type='file' name='berkas' class='form-control-file form-control-sm' id='file' disabled>
                                         <input type='hidden' name='filex' value='$data[file]'>
                                     </div>
                                 </div>
@@ -284,8 +284,9 @@
                                 <div class='form-row'>
                                     <div class='form-group col-12'>                                    
                                         <h5 class='text-white font-weight-light text-uppercase font-weight-bold mt-2 mb-2 text-center'>
-                                            Form Input Surat Masuk
+                                            Form Input Surat Keluar
                                         </h5>
+                                        <input type='hidden' name='id_user' value='ayunda919'>
                                     </div>
                                 </div>
                                 <div class='form-row'>
@@ -298,34 +299,31 @@
                                         <input type='date' name='tgl_surat' class='form-control form-control-sm' placeholder='Tgl Surat' required>
                                     </div>
                                     <div class='form-group col-4'>
-                                        <label for='tgl'>Tanggal Diterima</label>
-                                        <input type='date' name='tgl_diterima' class='form-control form-control-sm' placeholder='Tgl Diterima' required>
-                                    </div>
-                                </div>
-                                <div class='form-row'>
-                                    <div class='form-group col-6'>
-                                        <input type='text' name='perihal' class='form-control form-control-sm' required placeholder='Perihal Surat'>
-                                    </div>
-                                    <div class='form-group col-6'>
+                                        <label for='sifat'>Sifat Surat</label>
                                         <input type='text' name='sifat' class='form-control form-control-sm' required placeholder='Sifat Surat'>
                                     </div>
                                 </div>
                                 <div class='form-row'>
                                     <div class='form-group col-6'>
+                                        <label for='perihal'>Perihal Surat</label>
+                                        <input type='text' name='perihal' class='form-control form-control-sm' required placeholder='Perihal Surat'>
+                                    </div>
+                                    <div class='form-group col-6'>
                                         <label>Pilih Instansi</label>
                                         <select name='kd_instansi' class='form-control form-control-sm'>
                                             <option value=''>Pilih Intansi</option>";
                                             foreach($instansi as $ins){
-                                             echo"
-                                               <option value='$ins[kd_instansi]'>$ins[nm_instansi]</option>";
+                                            echo"
+                                            <option value='$ins[kd_instansi]'>$ins[nm_instansi]</option>";
                                             }
                                         echo"
                                         </select>
                                     </div>
-                                    
-                                    <div class='form-group col-6'>
+                                </div>
+                                <div class='form-row'>
+                                    <div class='form-group col-12'>
                                         <label for='upload'>Upload File Surat</label>
-                                        <input type='file' name='berkas' class='form-control-file  border border-light mt-' required>
+                                        <input type='file' name='berkas' class='form-control-file border border-light' required>
                                     </div>
                                 </div>
                                 <div class='form-row'>
@@ -355,7 +353,7 @@
                                 </div>
                                 <div class='form-row'>
                                     <div class='form-group col-4'>
-                                        <a href='index.php?menu=SuratMasukAdmin' class='btn btn-sm btn-danger w-100'>Batal</a>
+                                        <a href='index.php?menu=SuratKeluarAdmin' class='btn btn-sm btn-danger w-100'>Batal</a>
                                     </div>
                                     <div class='form-group col-8'>
                                         <input type='submit' name='action' value='Simpan' class='btn btn-sm btn-primary w-100'>
