@@ -4,16 +4,20 @@ include_once "KoneksiDb.php";
 class SuratMasuk{
 
     private $no_surat;
+    private $no_suratx;
     private $tgl_surat;
     private $tgl_diterima;
     private $perihal;
     private $sifat;
     private $kd_instansi;
     private $file;
-    private $kd_perusahaan;
 
     public function setNoSurat($no_surat){
         $this->no_surat = $no_surat;
+    }
+
+    public function setNoSuratx($no_suratx){
+        $this->no_suratx = $no_suratx;
     }
 
     public function setTglSurat($tgl_surat){
@@ -40,13 +44,9 @@ class SuratMasuk{
         $this->file = $file;
     }
 
-    public function setKdPerusahaan($kd_perusahaan){
-        $this->kd_perusahaan = $kd_perusahaan;
-    }
-
     public function queryInputSuratMasuk(){
         $kdb = new KoneksiDb();
-        $query = "INSERT INTO surat_masuk VALUES('$this->no_surat', '$this->tgl_surat', '$this->tgl_diterima', '$this->perihal', '$this->sifat', '$this->kd_instansi', '$this->file', '$this->kd_perusahaan')";
+        $query = "INSERT INTO surat_masuk VALUES('$this->no_surat', '$this->tgl_surat', '$this->tgl_diterima', '$this->perihal', '$this->sifat', '$this->kd_instansi', '$this->file')";
         $kdb->execute($query);
     }
 
@@ -64,9 +64,9 @@ class SuratMasuk{
         return $result->fetch_array();
     }
 
-    public function queryEditSuratMasuk($no_suratx){
+    public function queryEditSuratMasuk(){
         $kdb = new KoneksiDb();
-        $query = "UPDATE surat_masuk SET no_surat='$this->no_surat', tgl_surat='$this->tgl_surat', tgl_diterima='$this->tgl_diterima', perihal='$this->perihal', sifat='$this->sifat', kd_instansi='$this->kd_instansi', file='$this->file' WHERE no_surat='$no_suratx'";
+        $query = "UPDATE surat_masuk SET no_surat='$this->no_surat', tgl_surat='$this->tgl_surat', tgl_diterima='$this->tgl_diterima', perihal='$this->perihal', sifat='$this->sifat', kd_instansi='$this->kd_instansi', file='$this->file' WHERE no_surat='$this->no_suratx'";
         $kdb->execute($query);
     }
 

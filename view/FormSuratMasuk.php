@@ -19,13 +19,13 @@
        
         switch ($action){
             case "Simpan":
-                $result = $msum->inputSuratMasuk($_POST["no_surat"], $_POST["tgl_surat"], $_POST["tgl_diterima"], $_POST["perihal"], $_POST["sifat"], $_POST["kd_instansi"], $_FILES['berkas']['name'], $_POST["kd_perusahaan"], $kd_instansi_new, $nm_instansi, $pic, $alamat, $_FILES['berkas']['tmp_name']);
+                $result = $msum->inputSuratMasuk($_POST["no_surat"], $_POST["tgl_surat"], $_POST["tgl_diterima"], $_POST["perihal"], $_POST["sifat"], $_POST["kd_instansi"], $_FILES['berkas']['name'], $kd_instansi_new, $nm_instansi, $pic, $alamat, $_FILES['berkas']['tmp_name']);
                 break;
             case "Ubah":
-                $result = $ma->editAkun($_POST["nama_lengkap"], $_POST["username"], $_POST["usernamex"], $_POST["level"], $_POST["password1"], $_POST["password2"], $_POST["pass_hide"]);
+                $result = $msum->editSuratMasuk($_POST["no_surat"],$_POST["no_suratx"], $_POST["tgl_surat"], $_POST["tgl_diterima"], $_POST["perihal"], $_POST["sifat"], $_POST["kd_instansi"], $_FILES['berkas']['name'], $_POST['filex'], $kd_instansi_new, $nm_instansi, $pic, $alamat, $_FILES['berkas']['tmp_name']);
                 break;
             case "Hapus":
-                $ma->hapusAkun($_POST["username"]);
+                $msum->hapusSuratMasuk($_POST["no_surat"], $_POST["berkas"]);
                 break;
             default:
                 echo "<h4 class='text-white'>Logika Error</h4>";
@@ -139,6 +139,7 @@
                                     <div class='form-group col-4'>
                                         <label for='nosurat'>No Surat</label>
                                         <input type='text' name='no_surat' value='$data[no_surat]' class='form-control form-control-sm' placeholder='No Surat' required>
+                                        <input type='hidden' name='no_suratx' value='$data[no_surat]'>
                                     </div>
                                     <div class='form-group col-4'>
                                         <label for='tgl'>Tanggal Surat</label>
@@ -151,9 +152,11 @@
                                 </div>
                                 <div class='form-row'>
                                     <div class='form-group col-6'>
+                                        <label>Perihal</label>
                                         <input type='text' name='perihal' value='$data[perihal]' class='form-control form-control-sm' required placeholder='Perihal Surat'>
                                     </div>
                                     <div class='form-group col-6'>
+                                        <label>Sifat</label>
                                         <input type='text' name='sifat' value='$data[sifat]' class='form-control form-control-sm' required placeholder='Sifat Surat'>
                                     </div>
                                 </div>
@@ -175,8 +178,12 @@
                                     </div>
                                     
                                     <div class='form-group col-6'>
-                                        <label for='upload'>Upload File Surat</label>
-                                        <input type='file' name='berkas' class='form-control-file form-control-sm' value='$data[file]' required>
+                                        <div class='form-check'>
+                                            <input class='form-check-input' type='checkbox' id='uploadFile'>
+                                            <label class='form-check-label'>Upload Surat Baru</label>
+                                        </div>
+                                        <input type='file' name='berkas' class='form-control-file form-control-sm' id='file' disabled>
+                                        <input type='hidden' name='filex' value='$data[file]'>
                                     </div>
                                 </div>
                                 <div class='form-row'>
@@ -201,7 +208,7 @@
                                 </div>
                                 <div class='form-row'>
                                     <div class='form-group col-12'>                                    
-                                        <a class='text-danger'>$result $file</a>
+                                        <a class='text-danger'>$result</a>
                                     </div>
                                 </div>
                                 <div class='form-row'>
@@ -209,41 +216,65 @@
                                         <a href='index.php?menu=SuratMasukAdmin' class='btn btn-sm btn-danger w-100'>Batal</a>
                                     </div>
                                     <div class='form-group col-8'>
-                                        <input type='submit' name='action' value='Simpan' class='btn btn-sm btn-primary w-100'>
+                                        <input type='submit' name='action' value='Ubah' class='btn btn-sm btn-primary w-100'>
                                     </div>
                                 </div>
                             </form>";
                             break;
                         case "hapus":
-                            echo "<form action='' method='post'>
+                            echo "<form action='' method='post' enctype='multipart/form-data'>
                                 <div class='form-row'>
                                     <div class='form-group col-12'>                                    
-                                        <h5 class='text-white font-weight-light text-uppercase font-weight-bold mt-5 mb-4 text-center'>
-                                            Hapus Akun?
+                                        <h5 class='text-white font-weight-light text-uppercase font-weight-bold mt-2 mb-2 text-center'>
+                                            Hapus Surat Masuk?
                                         </h5>
                                     </div>
                                 </div>
                                 <div class='form-row'>
-                                    <div class='form-group col-8'>
-                                        <input type='text' name='nama_lengkap' class='form-control' value='$data[nama_lengkap]' disabled>
+                                    <div class='form-group col-4'>
+                                        <label for='nosurat'>No Surat</label>
+                                        <input type='text' value='$data[no_surat]' class='form-control form-control-sm' placeholder='No Surat' disabled>
+                                        <input type='hidden' name='no_surat' value='$data[no_surat]'>
                                     </div>
                                     <div class='form-group col-4'>
-                                        <input type='text' class='form-control' value='$data[username]' disabled>
-                                        <input type='hidden' name='username' value='$data[username]' required>
+                                        <label for='tgl'>Tanggal Surat</label>
+                                        <input type='date' name='tgl_surat' value='$data[tgl_surat]' class='form-control form-control-sm' placeholder='Tgl Surat' disabled>
+                                    </div>
+                                    <div class='form-group col-4'>
+                                        <label for='tgl'>Tanggal Diterima</label>
+                                        <input type='date' name='tgl_diterima' value='$data[tgl_diterima]' class='form-control form-control-sm' placeholder='Tgl Diterima' disabled>
                                     </div>
                                 </div>
                                 <div class='form-row'>
-                                    <div class='form-group col-12'>
-                                        <label for='level'>Level</label>
-                                        <input type='text' name='level' class='form-control' value='$data[level]' disabled>
+                                    <div class='form-group col-6'>
+                                        <label>Perihal</label>
+                                        <input type='text' name='perihal' value='$data[perihal]' class='form-control form-control-sm' placeholder='Perihal Surat' disabled>
+                                    </div>
+                                    <div class='form-group col-6'>
+                                        <label>Sifat</label>
+                                        <input type='text' name='sifat' value='$data[sifat]' class='form-control form-control-sm' placeholder='Sifat Surat' disabled>
+                                    </div>
+                                </div>
+                                <div class='form-row'>
+                                    <div class='form-group col-6'>
+                                        <label>Pilih Instansi</label>
+                                        <select name='kd_instansi' class='form-control form-control-sm' disabled>
+                                            <option value='$data[kd_instansi]'>$data[nm_instansi]</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class='form-group col-6'>
+                                        <label>File Surat</label>
+                                        <input type='text' value='$data[file]' class='form-control form-control-sm' disabled>
+                                        <input type='hidden' name='berkas' value='$data[file]'>
                                     </div>
                                 </div>
                                 <div class='form-row'>
                                     <div class='form-group col-4'>
-                                        <a href='index.php?menu=ManajemenAkun' class='btn btn-danger w-100'>Batal</a>
+                                        <a href='index.php?menu=SuratMasukAdmin' class='btn btn-sm btn-danger w-100'>Batal</a>
                                     </div>
                                     <div class='form-group col-8'>
-                                        <input type='submit' name='action' value='Hapus' class='btn btn-primary w-100'>
+                                        <input type='submit' name='action' value='Hapus' class='btn btn-sm btn-primary w-100'>
                                     </div>
                                 </div>
                             </form>";
@@ -256,7 +287,6 @@
                                             Form Input Surat Masuk
                                         </h5>
                                     </div>
-                                    <input type='hidden' name='kd_perusahaan' value='PT-ARV'>
                                 </div>
                                 <div class='form-row'>
                                     <div class='form-group col-4'>
@@ -361,6 +391,7 @@
     <script>
         $(document).ready(function(){
             /*disable form intansi*/
+            $("#file").prop("disabled", true);
             $("#kd_instansi").prop("disabled", true);
             $("#nm_instansi").prop("disabled", true);
             $("#alamat").prop("disabled", true);
@@ -380,6 +411,16 @@
                     $("#pic").prop("disabled", true);
                 }
             });
+
+            $("#uploadFile").click(function(){
+                if($(this).prop("checked") == true){
+                    $("#file").prop("disabled",false);
+                } else if($(this).prop("checked") == false){
+                    $("#file").prop("disabled",true);
+                }
+            })
+
+
         });
     </script>
 

@@ -96,7 +96,6 @@
 
                 <div class="row mt-2 mr-1 ml-1 mb-1">
                 <?php
-                    $kd_perusahaan = "PT-ARV";
 
                     if(isset($_POST["key"])){
                         $search = $_POST["key"];
@@ -105,7 +104,7 @@
                     }
 
                     $msum = new ManajemenSuratMasuk();
-                    $msum->melihatSuratMasuk($kd_perusahaan, $search);
+                    $msum->melihatSuratMasuk($search);
                 ?>
                 </div>
             
