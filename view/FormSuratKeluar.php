@@ -22,7 +22,7 @@
                 $result = $msuk->inputSuratKeluar($_POST["no_surat"], $_POST["tgl_surat"], $_POST["sifat"], $_POST["perihal"], $_POST["kd_instansi"], $_FILES['berkas']['name'], $kd_instansi_new, $nm_instansi, $pic, $alamat, $_FILES['berkas']['tmp_name'], $_POST['id_user']);
                 break;
             case "Ubah":
-                $result = $msuk->editSuratKeluar($_POST["no_surat"],$_POST["no_suratx"], $_POST["tgl_surat"], $_POST["tgl_diterima"], $_POST["perihal"], $_POST["sifat"], $_POST["kd_instansi"], $_FILES['berkas']['name'], $_POST['filex'], $kd_instansi_new, $nm_instansi, $pic, $alamat, $_FILES['berkas']['tmp_name']);
+                $result = $msuk->editSuratKeluar($_POST["no_surat"], $_POST["no_suratx"], $_POST["tgl_surat"], $_POST["perihal"], $_POST["sifat"], $_POST["kd_instansi"], $_FILES['berkas']['name'], $_POST['filex'], $kd_instansi_new, $nm_instansi, $pic, $alamat, $_FILES['berkas']['tmp_name']);
                 break;
             case "Hapus":
                 $msuk->hapusSuratKeluar($_POST["no_surat"], $_POST["berkas"]);
@@ -127,106 +127,101 @@
                     <?php
                     switch ($form){
                         case "edit":
-                            echo "<form action='' method='post' enctype='multipart/form-data'>
-                                <div class='form-row'>
-                                    <div class='form-group col-12'>                                    
-                                        <h5 class='text-white font-weight-light text-uppercase font-weight-bold mt-2 mb-2 text-center'>
-                                            Form Edit Surat Masuk
-                                        </h5>
-                                    </div>
+                        echo "<form action='' method='post' enctype='multipart/form-data'>
+                            <div class='form-row'>
+                                <div class='form-group col-12'>                                    
+                                    <h5 class='text-white font-weight-light text-uppercase font-weight-bold mt-2 mb-2 text-center'>
+                                        Form Edit Surat Keluar
+                                    </h5>
                                 </div>
-                                <div class='form-row'>
-                                    <div class='form-group col-4'>
-                                        <label for='nosurat'>No Surat</label>
-                                        <input type='text' name='no_surat' value='$data[no_surat]' class='form-control form-control-sm' placeholder='No Surat' required>
-                                        <input type='hidden' name='no_suratx' value='$data[no_surat]'>
-                                    </div>
-                                    <div class='form-group col-4'>
-                                        <label for='tgl'>Tanggal Surat</label>
-                                        <input type='date' name='tgl_surat' value='$data[tgl_surat]' class='form-control form-control-sm' placeholder='Tgl Surat' required>
-                                    </div>
-                                    <div class='form-group col-4'>
-                                        <label for='tgl'>Tanggal Diterima</label>
-                                        <input type='date' name='tgl_diterima' value='$data[tgl_diterima]' class='form-control form-control-sm' placeholder='Tgl Diterima' required>
-                                    </div>
+                            </div>
+                            <div class='form-row'>
+                                <div class='form-group col-4'>
+                                    <label for='nosurat'>No Surat</label>
+                                    <input type='text' name='no_surat' value='$data[no_surat]' class='form-control form-control-sm' placeholder='No Surat' required>
+                                    <input type='hidden' name='no_suratx' value='$data[no_surat]'>
                                 </div>
-                                <div class='form-row'>
-                                    <div class='form-group col-6'>
-                                        <label>Perihal</label>
-                                        <input type='text' name='perihal' value='$data[perihal]' class='form-control form-control-sm' required placeholder='Perihal Surat'>
-                                    </div>
-                                    <div class='form-group col-6'>
-                                        <label>Sifat</label>
-                                        <input type='text' name='sifat' value='$data[sifat]' class='form-control form-control-sm' required placeholder='Sifat Surat'>
-                                    </div>
+                                <div class='form-group col-4'>
+                                    <label for='tgl'>Tanggal Surat</label>
+                                    <input type='date' name='tgl_surat' value='$data[tgl_surat]' class='form-control form-control-sm' placeholder='Tgl Surat' required>
                                 </div>
-                                <div class='form-row'>
-                                    <div class='form-group col-6'>
-                                        <label>Pilih Instansi</label>
-                                        <select name='kd_instansi' class='form-control form-control-sm'>
-                                            <option value='$data[kd_instansi]'>$data[nm_instansi]</option>";
-                                            foreach($instansi as $ins){
-                                                if($data[kd_instansi] == $ins[kd_instansi]){
-                                                    continue;
-                                                } else{
-                                                    echo"
-                                                    <option value='$ins[kd_instansi]'>$ins[nm_instansi]</option>";
-                                                }
+                                <div class='form-group col-4'>
+                                    <label for='sifat'>Sifat Surat</label>
+                                    <input type='text' name='sifat' value='$data[sifat]' class='form-control form-control-sm' required placeholder='Sifat Surat'>
+                                </div>
+                            </div>
+                            <div class='form-row'>
+                                <div class='form-group col-6'>
+                                    <label for='perihal'>Perihal Surat</label>
+                                    <input type='text' name='perihal' value='$data[perihal]' class='form-control form-control-sm' required placeholder='Perihal Surat'>
+                                </div>
+                                <div class='form-group col-6'>
+                                    <label>Pilih Instansi</label>
+                                    <select name='kd_instansi' class='form-control form-control-sm'>
+                                        <option value='$data[kd_instansi]'>$data[nm_instansi]</option>";
+                                        foreach($instansi as $ins){
+                                            if($data[kd_instansi] == $ins[kd_instansi]){
+                                                continue;
+                                            } else{
+                                                echo"
+                                                <option value='$ins[kd_instansi]'>$ins[nm_instansi]</option>";
                                             }
-                                        echo"
-                                        </select>
-                                    </div>
-                                    
-                                    <div class='form-group col-6'>
-                                        <div class='form-check'>
-                                            <input class='form-check-input' type='checkbox' id='uploadFile'>
-                                            <label class='form-check-label'>Upload Surat Baru</label>
-                                        </div>
-                                        <input type='file' name='berkas' class='form-control-file form-control-sm' id='file' disabled>
-                                        <input type='hidden' name='filex' value='$data[file]'>
-                                    </div>
+                                        }
+                                    echo"
+                                    </select>
                                 </div>
-                                <div class='form-row'>
-                                    <div class='form-group col-4'>    
-                                        <div class='form-check'>
-                                            <input class='form-check-input' type='checkbox' id='inputInstansi'>
-                                            <label class='form-check-label'>Input Instansi Baru</label>
-                                        </div>
-                                        <input type='text' name='kd_instansi_new' class='form-control form-control-sm' id='kd_instansi' required placeholder='Masukkan Kode Intansi'>
+                            </div>
+                            <div class='form-row'>
+                                <div class='form-group col-12'>
+                                    <div class='form-check'>
+                                        <input class='form-check-input' type='checkbox' id='uploadFile'>
+                                        <label class='form-check-label'>Upload Surat Baru</label>
                                     </div>
-                                    <div class='form-group col-4 pt-4'>
-                                        <input type='text' name='nm_instansi' class='form-control form-control-sm' id='nm_instansi' required placeholder='Masukkan Nama Instansi'>
-                                    </div>
-                                    <div class='form-group col-4 pt-4'>
-                                        <input type='text' name='pic' class='form-control form-control-sm' id='pic' required placeholder='Masukkan PIC'>
-                                    </div>
+                                    <input type='file' name='berkas' class='form-control-file border border-light' id='file' disabled>
+                                    <input type='hidden' name='filex' value='$data[file]'>
                                 </div>
-                                <div class='form-row'>
-                                    <div class='form-group col-12'>
-                                        <input type='text' name='alamat' class='form-control form-control-sm' id='alamat' required placeholder='Masukkan Alamat'>
+                            </div>
+                            <div class='form-row'>
+                                <div class='form-group col-4'>    
+                                    <div class='form-check'>
+                                        <input class='form-check-input' type='checkbox' id='inputInstansi'>
+                                        <label class='form-check-label'>Input Instansi Baru</label>
                                     </div>
+                                    <input type='text' name='kd_instansi_new' class='form-control form-control-sm' id='kd_instansi' required placeholder='Masukkan Kode Intansi'>
                                 </div>
-                                <div class='form-row'>
-                                    <div class='form-group col-12'>                                    
-                                        <a class='text-danger'>$result</a>
-                                    </div>
+                                <div class='form-group col-4 pt-4'>
+                                    <input type='text' name='nm_instansi' class='form-control form-control-sm' id='nm_instansi' required placeholder='Masukkan Nama Instansi'>
                                 </div>
-                                <div class='form-row'>
-                                    <div class='form-group col-4'>
-                                        <a href='index.php?menu=SuratMasukAdmin' class='btn btn-sm btn-danger w-100'>Batal</a>
-                                    </div>
-                                    <div class='form-group col-8'>
-                                        <input type='submit' name='action' value='Ubah' class='btn btn-sm btn-primary w-100'>
-                                    </div>
+                                <div class='form-group col-4 pt-4'>
+                                    <input type='text' name='pic' class='form-control form-control-sm' id='pic' required placeholder='Masukkan PIC'>
                                 </div>
-                            </form>";
+                            </div>
+                            <div class='form-row'>
+                                <div class='form-group col-12'>
+                                    <input type='text' name='alamat' class='form-control form-control-sm' id='alamat' required placeholder='Masukkan Alamat'>
+                                </div>
+                            </div>
+                            <div class='form-row'>
+                                <div class='form-group col-12'>                                    
+                                    <a class='text-danger'>$result</a>
+                                </div>
+                            </div>
+                            <div class='form-row'>
+                                <div class='form-group col-4'>
+                                    <a href='index.php?menu=SuratKeluarAdmin' class='btn btn-sm btn-danger w-100'>Batal</a>
+                                </div>
+                                <div class='form-group col-8'>
+                                    <input type='submit' name='action' value='Ubah' class='btn btn-sm btn-primary w-100'>
+                                </div>
+                            </div>
+                        </form>";
                             break;
                         case "hapus":
                             echo "<form action='' method='post' enctype='multipart/form-data'>
                                 <div class='form-row'>
                                     <div class='form-group col-12'>                                    
                                         <h5 class='text-white font-weight-light text-uppercase font-weight-bold mt-2 mb-2 text-center'>
-                                            Hapus Surat Masuk?
+                                            Hapus Surat Keluar?
                                         </h5>
                                     </div>
                                 </div>
@@ -241,8 +236,8 @@
                                         <input type='date' name='tgl_surat' value='$data[tgl_surat]' class='form-control form-control-sm' placeholder='Tgl Surat' disabled>
                                     </div>
                                     <div class='form-group col-4'>
-                                        <label for='tgl'>Tanggal Diterima</label>
-                                        <input type='date' name='tgl_diterima' value='$data[tgl_diterima]' class='form-control form-control-sm' placeholder='Tgl Diterima' disabled>
+                                        <label for='sifat'>Sifat Surat</label>
+                                        <input type='text' name='sifat' value='$data[sifat]' class='form-control form-control-sm' placeholder='Tgl Surat' disabled>
                                     </div>
                                 </div>
                                 <div class='form-row'>
@@ -251,19 +246,14 @@
                                         <input type='text' name='perihal' value='$data[perihal]' class='form-control form-control-sm' placeholder='Perihal Surat' disabled>
                                     </div>
                                     <div class='form-group col-6'>
-                                        <label>Sifat</label>
-                                        <input type='text' name='sifat' value='$data[sifat]' class='form-control form-control-sm' placeholder='Sifat Surat' disabled>
-                                    </div>
-                                </div>
-                                <div class='form-row'>
-                                    <div class='form-group col-6'>
-                                        <label>Pilih Instansi</label>
+                                        <label>Instansi</label>
                                         <select name='kd_instansi' class='form-control form-control-sm' disabled>
                                             <option value='$data[kd_instansi]'>$data[nm_instansi]</option>
                                         </select>
                                     </div>
-                                    
-                                    <div class='form-group col-6'>
+                                </div>
+                                <div class='form-row'>
+                                    <div class='form-group col-12'>
                                         <label>File Surat</label>
                                         <input type='text' value='$data[file]' class='form-control form-control-sm' disabled>
                                         <input type='hidden' name='berkas' value='$data[file]'>
@@ -271,7 +261,7 @@
                                 </div>
                                 <div class='form-row'>
                                     <div class='form-group col-4'>
-                                        <a href='index.php?menu=SuratMasukAdmin' class='btn btn-sm btn-danger w-100'>Batal</a>
+                                        <a href='index.php?menu=SuratKeluarAdmin' class='btn btn-sm btn-danger w-100'>Batal</a>
                                     </div>
                                     <div class='form-group col-8'>
                                         <input type='submit' name='action' value='Hapus' class='btn btn-sm btn-primary w-100'>

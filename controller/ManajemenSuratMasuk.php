@@ -15,23 +15,28 @@ class ManajemenSuratMasuk{
         $sum->setPerihal($perihal);
         $sum->setSifat($sifat);
         $sum->setFile($file);
-
-        $upload = $this->uploadFile($file, $tmp);
-        if($upload === true){
-            if(!empty($kd_instansi_new)){
-                $ins->setKdInstansi($kd_instansi_new);
-                $ins->setNmInstansi($nm_instansi);
-                $ins->setAlamat($alamat);
-                $ins->setPic($pic);
-                $ins->queryInputInstansi();
-                $sum->setKdInstansi($kd_instansi_new);
-                $sum->queryInputSuratMasuk();
-            } else{
-                $sum->setKdInstansi($kd_instansi);
-                $sum->queryInputSuratMasuk();
+        
+        $find = $this->mencariSuratMasuk($no_surat);
+        if(!empty($find)){
+            return $msg_err ="Nomor Surat Yand Anda Masukkan Sudah Terdaftar";
+        } else{
+            $upload = $this->uploadFile($file, $tmp);
+            if($upload === true){
+                if(!empty($kd_instansi_new)){
+                    $ins->setKdInstansi($kd_instansi_new);
+                    $ins->setNmInstansi($nm_instansi);
+                    $ins->setAlamat($alamat);
+                    $ins->setPic($pic);
+                    $ins->queryInputInstansi();
+                    $sum->setKdInstansi($kd_instansi_new);
+                    $sum->queryInputSuratMasuk();
+                } else{
+                    $sum->setKdInstansi($kd_instansi);
+                    $sum->queryInputSuratMasuk();
+                }
+            } else {
+                return $msg_err ="Format File Tidak Di Dukung";
             }
-        } else {
-            return $msg_err ="Format File Tidak Di Dukung";
         }
         header("location:index.php?menu=SuratMasukAdmin");
     }

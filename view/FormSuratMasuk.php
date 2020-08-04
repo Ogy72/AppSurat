@@ -257,7 +257,7 @@
                                 </div>
                                 <div class='form-row'>
                                     <div class='form-group col-6'>
-                                        <label>Pilih Instansi</label>
+                                        <label>Instansi</label>
                                         <select name='kd_instansi' class='form-control form-control-sm' disabled>
                                             <option value='$data[kd_instansi]'>$data[nm_instansi]</option>
                                         </select>

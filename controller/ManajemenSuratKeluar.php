@@ -16,22 +16,27 @@ class ManajemenSuratKeluar{
         $suk->setFile($file);
         $suk->setIdUser($id_user);
 
-        $upload = $this->uploadFile($file, $tmp);
-        if($upload === true){
-            if(!empty($kd_instansi_new)){
-                $ins->setKdInstansi($kd_instansi_new);
-                $ins->setNmInstansi($nm_instansi);
-                $ins->setAlamat($alamat);
-                $ins->setPic($pic);
-                $ins->queryInputInstansi();
-                $suk->setKdInstansi($kd_instansi_new);
-                $suk->queryInputSuratKeluar();
-            } else{
-                $suk->setKdInstansi($kd_instansi);
-                $suk->queryInputSuratKeluar();
+        $find = $this->mencariSuratKeluar($no_surat);
+        if(!empty($find)){
+            return $msg_err ="Nomor Surat Yand Anda Masukkan Sudah Terdaftar";
+        } else{
+            $upload = $this->uploadFile($file, $tmp);
+            if($upload === true){
+                if(!empty($kd_instansi_new)){
+                    $ins->setKdInstansi($kd_instansi_new);
+                    $ins->setNmInstansi($nm_instansi);
+                    $ins->setAlamat($alamat);
+                    $ins->setPic($pic);
+                    $ins->queryInputInstansi();
+                    $suk->setKdInstansi($kd_instansi_new);
+                    $suk->queryInputSuratKeluar();
+                } else{
+                    $suk->setKdInstansi($kd_instansi);
+                    $suk->queryInputSuratKeluar();
+                }
+            } else {
+                return $msg_err ="Format File Tidak Di Dukung";
             }
-        } else {
-            return $msg_err ="Format File Tidak Di Dukung";
         }
         header("location:index.php?menu=SuratKeluarAdmin");
     }
@@ -48,25 +53,24 @@ class ManajemenSuratKeluar{
     }
 
     public function mencariSuratKeluar($no_surat){
-        $sum = new SuratMasuk();
-        $sum->setNoSurat($no_surat);
-        return $sum->queryMencariSuratMasuk();
+        $suk = new SuratKeluar();
+        $suk->setNoSurat($no_surat);
+        return $suk->queryMencariSuratKeluar();
     }
 
-    public function editSuratMasuk($no_surat, $no_suratx, $tgl_surat, $tgl_diterima, $perihal, $sifat, $kd_instansi, $file, $filex, $kd_instansi_new, $nm_instansi, $pic, $alamat, $tmp){
-        $sum = new SuratMasuk();
+    public function editSuratKeluar($no_surat, $no_suratx, $tgl_surat, $perihal, $sifat, $kd_instansi, $file, $filex, $kd_instansi_new, $nm_instansi, $pic, $alamat, $tmp){
+        $suk = new SuratKeluar();
         $ins = new Instansi();
 
-        $sum->setNoSurat($no_surat);
-        $sum->setNoSuratx($no_suratx);
-        $sum->setTglSurat($tgl_surat);
-        $sum->setTglDiterima($tgl_diterima);
-        $sum->setPerihal($perihal);
-        $sum->setSifat($sifat);
+        $suk->setNoSurat($no_surat);
+        $suk->setNoSuratx($no_suratx);
+        $suk->setTglSurat($tgl_surat);
+        $suk->setPerihal($perihal);
+        $suk->setSifat($sifat);
         
         if(!empty($file)){
-            $sum->setFile($file);
-            $file_for_delete = "file/SuratMasuk/$filex";
+            $suk->setFile($file);
+            $file_for_delete = "file/SuratKeluar/$filex";
             unlink($file_for_delete); //delete file
             $upload = $this->uploadFile($file, $tmp);
             if($upload === true){
@@ -76,41 +80,41 @@ class ManajemenSuratKeluar{
                     $ins->setAlamat($alamat);
                     $ins->setPic($pic);
                     $ins->queryInputInstansi();
-                    $sum->setKdInstansi($kd_instansi_new);
-                    $sum->queryEditSuratMasuk();
+                    $suk->setKdInstansi($kd_instansi_new);
+                    $suk->queryEditSuratKeluar();
                 } else{
-                    $sum->setKdInstansi($kd_instansi);
-                    $sum->queryEditSuratMasuk();
+                    $suk->setKdInstansi($kd_instansi);
+                    $suk->queryEditSuratKeluar();
                 }
             } else {
                 return $msg_err ="Format File Tidak Di Dukung";
             }
         } else{
-            $sum->setFile($filex);
+            $suk->setFile($filex);
             if(!empty($kd_instansi_new)){
                 $ins->setKdInstansi($kd_instansi_new);
                 $ins->setNmInstansi($nm_instansi);
                 $ins->setAlamat($alamat);
                 $ins->setPic($pic);
                 $ins->queryInputInstansi();
-                $sum->setKdInstansi($kd_instansi_new);
-                $sum->queryEditSuratMasuk();
+                $suk->setKdInstansi($kd_instansi_new);
+                $suk->queryEditSuratKeluar();
             } else{
-                $sum->setKdInstansi($kd_instansi);
-                $sum->queryEditSuratMasuk();
+                $suk->setKdInstansi($kd_instansi);
+                $suk->queryEditSuratKeluar();
             }
         }
-        header("location:index.php?menu=SuratMasukAdmin");
+        header("location:index.php?menu=SuratKeluarAdmin");
         
     }
 
-    public function hapusSuratMasuk($no_surat, $file){
-        $sum = new SuratMasuk();
-        $sum->setNoSurat($no_surat);
-        $sum->queryHapusSuratMasuk();
-        $file_for_delete = "file/SuratMasuk/$file";
+    public function hapusSuratKeluar($no_surat, $file){
+        $suk = new SuratKeluar();
+        $suk->setNoSurat($no_surat);
+        $suk->queryHapusSuratkeluar();
+        $file_for_delete = "file/SuratKeluar/$file";
         unlink($file_for_delete); //delete file
-        header("location:index.php?menu=SuratMasukAdmin");
+        header("location:index.php?menu=SuratKeluarAdmin");
     }
 
     public function uploadFile($file, $tmp){

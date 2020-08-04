@@ -150,11 +150,11 @@
                                         if($data["level"] == "Admin"){
                                         echo"
                                             <option value='Admin' selected>Admin</option>
-                                            <option value='Direktur'>Direktur</option>";
+                                            <option value='Super Admin'>Super Admin</option>";
                                         } else {
                                         echo"
                                             <option value='Admin'>Admin</option>
-                                            <option value='Direktur' selected>Direktur</option>";
+                                            <option value='Super Admin' selected>Super Admin</option>";
                                         }
                                         echo"
                                         </select>
@@ -245,7 +245,7 @@
                                         <select name='level' class='form-control'>
                                             <option value=''>Pilih Level</option>
                                             <option value='Admin'>Admin</option>
-                                            <option value='Direktur'>Direktur</option>
+                                            <option value='Super Admin'>Super Admin</option>
                                         </select>
                                     </div>
                                 </div>

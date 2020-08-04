@@ -53,26 +53,26 @@ class SuratKeluar{
     public function queryMelihatSuratKeluar($search){
         $kdb = new KoneksiDb();
         $query = "SELECT surat_keluar.*, instansi.nm_instansi, user.nama_lengkap FROM surat_keluar, instansi, user
-        WHERE surat_keluar.kd_instansi=instansi.kd_instansi AND surat_keluar.username=user.username AND surat_keluar.perihal LIKE '%$search%'";
+        WHERE surat_keluar.kd_instansi=instansi.kd_instansi AND surat_keluar.username=user.username AND surat_keluar.perihal LIKE '%$search%' ORDER BY surat_keluar.tgl_surat DESC";
         return $kdb->execute($query);
     }
     
-    public function queryMencariSuratMasuk(){
+    public function queryMencariSuratKeluar(){
         $kdb = new KoneksiDb();
-        $query = "SELECT surat_masuk.*, instansi.nm_instansi FROM surat_masuk, instansi WHERE surat_masuk.kd_instansi=instansi.kd_instansi AND surat_masuk.no_surat='$this->no_surat'";
+        $query = "SELECT surat_keluar.*, instansi.nm_instansi FROM surat_keluar, instansi WHERE surat_keluar.kd_instansi=instansi.kd_instansi AND surat_keluar.no_surat='$this->no_surat'";
         $result = $kdb->execute($query);
         return $result->fetch_array();
     }
 
-    public function queryEditSuratMasuk(){
+    public function queryEditSuratKeluar(){
         $kdb = new KoneksiDb();
-        $query = "UPDATE surat_masuk SET no_surat='$this->no_surat', tgl_surat='$this->tgl_surat', tgl_diterima='$this->tgl_diterima', perihal='$this->perihal', sifat='$this->sifat', kd_instansi='$this->kd_instansi', file='$this->file' WHERE no_surat='$this->no_suratx'";
+        $query = "UPDATE surat_keluar SET no_surat='$this->no_surat', tgl_surat='$this->tgl_surat', perihal='$this->perihal', sifat='$this->sifat', kd_instansi='$this->kd_instansi', file='$this->file' WHERE no_surat='$this->no_suratx'";
         $kdb->execute($query);
     }
 
-    public function queryHapusSuratMasuk(){
+    public function queryHapusSuratKeluar(){
         $kdb = new KoneksiDb();
-        $query = "DELETE FROM surat_masuk WHERE no_surat='$this->no_surat'";
+        $query = "DELETE FROM surat_keluar WHERE no_surat='$this->no_surat'";
         $kdb->execute($query);
     }
 
