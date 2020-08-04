@@ -2,6 +2,7 @@
 include_once "controller/ManajemenSuratMasuk.php";
 include_once "controller/ManajemenSuratKeluar.php";
 include_once "controller/ManajemenAkun.php";
+include_once "controller/Laporan.php";
 
 class Antarmuka{
 

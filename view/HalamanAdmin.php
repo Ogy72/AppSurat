@@ -9,6 +9,7 @@
     <!-- link css -->
     <link rel="stylesheet" href="css/bootstrap.css">    
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="chart-js/Chart.css">    
 </head>
 
 <body background="img/bg.png" class="pl-2 pr-2">
@@ -79,7 +80,28 @@
         <div class="row">
             <!-- isi Konten -->
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 konten" >
-            <h2 class="text-white font-weight-light mb-5 text-uppercase font-weight-bold">Laporan</h2>
+
+                <div class="row mt-3 mr-1 ml-1 mb-1">
+                    <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 pl-1">
+                        <h5 class="text-white font-weight-light text-uppercase font-weight-bold">Grafik Surat</h5>
+                    </div>
+                    <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 text-right pr-1">
+                        <li class="nav-item dropdown">
+                            <a class="dropdown-toggle btn btn-primary btn-sm" data-toggle="dropdown" href="#">Buat Laporan</a>
+                            <div class="dropdown-menu bg-light">
+                                <a class="dropdown-item text-primary" href="index.php?form=BuatSurat&bag=suratA">Laporan Surat Masuk</a>
+                                <a class="dropdown-item text-primary" href="index.php?form=BuatSurat&bag=suratB">Laporan Surat Keluar</a>
+                            </div>
+                        </li>
+                    </div>
+                </div>
+
+                <div class="row mt-4 mr-1 ml-1 mb-1">
+                    <?php
+                        $lap = new Laporan();
+                        $lap->melihatGrafikSurat();
+                    ?>
+                </div>
             </div>
         </div>
 
@@ -95,7 +117,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-
+    
 </body>
 
 </html>

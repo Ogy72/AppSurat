@@ -74,9 +74,13 @@ class SuratKeluar{
         $kdb = new KoneksiDb();
         $query = "DELETE FROM surat_keluar WHERE no_surat='$this->no_surat'";
         $kdb->execute($query);
-    }
+    }   
 
-    
+    public function queryFilterSurat($jenis){
+        $kdb = new KoneksiDb();
+        $query = "SELECT * FROM surat_keluar WHERE no_surat LIKE '%$jenis%'";
+        return $kdb->execute($query);
+    }
 
 }
 ?>

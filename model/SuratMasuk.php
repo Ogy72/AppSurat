@@ -76,7 +76,11 @@ class SuratMasuk{
         $kdb->execute($query);
     }
 
-    
+    public function queryFilterSurat($jenis){
+        $kdb = new KoneksiDb();
+        $query = "SELECT * FROM surat_masuk WHERE no_surat LIKE '%$jenis%'";
+        return $kdb->execute($query);
+    }
 
 }
 ?>
