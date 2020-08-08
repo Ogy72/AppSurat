@@ -30,12 +30,9 @@ class Antarmuka{
         include_once "view/MenuDataPerusahaan.php";
     }  
 
-    public function formBuatSurat($bag){
-        if($bag == "suratA"){
-            header("location:view/menuBuatSurat.php?surat=A");
-        } else if($bag == "suratB") {
-            header("location:view/menuBuatSurat.php?surat=B");
-        }
+    public function formBuatSurat($jenis){
+        $jenis_surat = $jenis;
+        include_once "view/FormBuatSurat.php";
     }
 
     public function formSuratMasuk($form, $key){

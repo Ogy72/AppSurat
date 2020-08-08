@@ -21,6 +21,9 @@
                 case "DataPerusahaan":
                     $ant->menuDataPerusahaan();
                     break;
+                case "BuatSurat":
+                    $ant->formBuatSurat($_GET["jenis"]);
+                    break;
                 case "FormSuratMasuk":
                     $ant->formSuratMasuk($_GET["form"], $_GET["key"]);
                     break;

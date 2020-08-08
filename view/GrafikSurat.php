@@ -51,35 +51,26 @@
 				datasets: [{
 					data: [
                         <?php
-                            $countBA = $baSuk+$baSum;
-                            echo $countBA;
+                            echo $aSuk;
+                        ?>, //Data Surat Quatation
+                        <?php
+                            echo $dSuk;
                         ?>, //Data Surat Berita Acara
                         <?php
-                            $countPO = $poSuk+$poSum;
-                            echo $countPO;
-                        ?>, //Data Surat Po
-                        <?php
-                            $countQU = $quSuk+$quSum;
-                            echo $countQU;
-                        ?>, //Data Surat Quotation
-                        <?php
-                            $countInv = $invSuk+$invSum;
-                            echo $countInv;
+                            echo $cSuk;
                         ?> //Data Surat Invoice
 					],
 					backgroundColor: [
 						window.chartColors.red,
                         window.chartColors.blue,
-                        window.chartColors.green,
-                        window.chartColors.orange,
+                        window.chartColors.orange
 					],
 					label: 'Dataset 1'
 				}],
 				labels: [
-					'Berita Acara',
-                    'Purchase Order',
                     'Quotation',
-                    'Invoice',
+                    'Berita Acara',
+                    'Invoice'
 				]
 			},
 			options: {

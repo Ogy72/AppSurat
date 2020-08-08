@@ -82,5 +82,12 @@ class SuratKeluar{
         return $kdb->execute($query);
     }
 
+    public function queryMax($char){
+        $kdb = new KoneksiDb();
+        $query = "SELECT MAX(no_surat) AS numer FROM surat_keluar WHERE no_surat LIKE '%$char%'";
+        $result = $kdb->execute($query);
+        return $result->fetch_array();
+    }
+
 }
 ?>

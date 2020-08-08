@@ -49,10 +49,10 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link a-clr dropdown-toggle" data-toggle="dropdown" href="#">Buat Surat</a>
                             <div class="dropdown-menu ">
-                                <a class="dropdown-item text-danger" href="index.php?form=BuatSurat&bag=suratA">A.Quotation</a>
-                                <a class="dropdown-item text-danger" href="index.php?form=BuatSurat&bag=suratB">B.Purchase Order</a>
-                                <a class="dropdown-item text-danger" href="index.php?form=BuatSurat&bag=suratC">C.Invoice</a>
-                                <a class="dropdown-item text-danger" href="index.php?form=BuatSurat&bag=suratD">D.Berita Acara </a>
+                                <a class="dropdown-item text-danger" href="index.php?menu=BuatSurat&jenis=suratQu">A.Quotation</a>
+                                <a class="dropdown-item text-danger" href="index.php?menu=BuatSurat&jenis=suratPo">B.Purchase Order</a>
+                                <a class="dropdown-item text-danger" href="index.php?menu=BuatSurat&jenis=suratInv">C.Invoice</a>
+                                <a class="dropdown-item text-danger" href="index.php?menu=BuatSurat&jenis=suratBa">D.Berita Acara </a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -83,24 +83,54 @@
 
                 <div class="row mt-3 mr-1 ml-1 mb-1">
                     <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 pl-1">
-                        <h5 class="text-white font-weight-light text-uppercase font-weight-bold">Grafik Surat</h5>
+                        <h5 class="text-white font-weight-light text-uppercase font-weight-bold">Grafik Surat & Laporan</h5>
                     </div>
                     <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 text-right pr-1">
                         <li class="nav-item dropdown">
                             <a class="dropdown-toggle btn btn-primary btn-sm" data-toggle="dropdown" href="#">Buat Laporan</a>
-                            <div class="dropdown-menu bg-light">
-                                <a class="dropdown-item text-primary" href="index.php?form=BuatSurat&bag=suratA">Laporan Surat Masuk</a>
-                                <a class="dropdown-item text-primary" href="index.php?form=BuatSurat&bag=suratB">Laporan Surat Keluar</a>
+                            <div class="dropdown-menu bg-light pl-2 pr-2">
+                                <form action="" method="post">
+                                    <div class="form-group">
+                                        <label for="tanggal1">Dari Tanggal</label>
+                                        <input type="date" name="tanggal1" class="form-control form-control-sm" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tanggal2">Sampai Tanggal</label>
+                                        <input type="date" name="tanggal2" class="form-control form-control-sm" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="laporan">Jenis Laporan</label>
+                                        <select name="laporan" class="form-control form-control-sm">
+                                            <option value="surat_masuk">Surat Masuk</option>
+                                            <option value="surat_keluar">Surat Keluar</option>
+                                        </select>
+                                    </div>
+                                    <input type="submit" name="action" value="Submit" class="btn btn-success btn-sm w-100">
+                                </form>
                             </div>
                         </li>
                     </div>
                 </div>
 
                 <div class="row mt-4 mr-1 ml-1 mb-1">
-                    <?php
-                        $lap = new Laporan();
+                <?php
+                    
+                    $lap = new Laporan();
+                    if(isset($_POST["action"])){
+                        $laporan = $_POST["laporan"];
+
+                        switch ($laporan){
+                            case "surat_masuk":
+                                $lap->rekapSuratMasuk();
+                                break;
+                            default:
+                                echo "error";
+                                break;
+                        }
+                    } else{
                         $lap->melihatGrafikSurat();
-                    ?>
+                    }
+                ?>
                 </div>
             </div>
         </div>

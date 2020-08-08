@@ -5,6 +5,31 @@ include_once "model/Instansi.php";
 
 class ManajemenSuratKeluar{
 
+    public function buatSurat($no_surat, $tgl_surat, $perihal, $sifat, $kd_instansi, $file, $id_user, $kd_instansi_new, $nm_instansi, $pic, $alamat){
+        $suk = new SuratKeluar();
+        $ins = new Instansi();
+
+        $suk->setNoSurat($no_surat);
+        $suk->setTglSurat($tgl_surat);
+        $suk->setPerihal($perihal);
+        $suk->setSifat($sifat);
+        $suk->setFile($file);
+        $suk->setIdUser($id_user);
+
+        if(!empty($kd_instansi_new)){    
+            $ins->setKdInstansi($kd_instansi_new);
+            $ins->setNmInstansi($nm_instansi);
+            $ins->setAlamat($alamat);
+            $ins->setPic($pic);
+            $ins->queryInputInstansi();
+            $suk->setKdInstansi($kd_instansi_new);
+            $suk->queryInputSuratKeluar();
+        } else{
+            $suk->setKdInstansi($kd_instansi);
+            $suk->queryInputSuratKeluar();
+        }
+    }
+
     public function inputSuratKeluar($no_surat, $tgl_surat, $sifat, $perihal, $kd_instansi, $file, $kd_instansi_new, $nm_instansi, $pic, $alamat, $tmp, $id_user){
         $suk = new SuratKeluar();
         $ins = new Instansi();
@@ -131,6 +156,79 @@ class ManajemenSuratKeluar{
             return $upload = false;
         }
 
+    }
+
+    public function getKode($char){
+        $suk = new SuratKeluar();
+        $data = $suk->queryMax($char);
+        $getKode = $data['numer'];
+
+        if($getKode){
+            $nilai = substr($getKode, 4, 1);
+            $kode = (int) $nilai;
+
+            $kode++;
+            $year = date('Y');
+            $dayDate = date('d-m');
+            if($dayDate == "1-1"){
+                $kode = 1;
+            }
+            $split = "/";
+            $month = $this->getRomawi();
+            $company = "ARV";
+            $getKode = $char.sprintf("%03s",$kode).$split.$company.$split.$month.$split.$year;
+
+        } else{
+            $kode = 1;
+            $getKode = $char.sprintf("%03s",$kode).$split.$company.$split.$month.$split.$year;
+        }
+
+        $no_surat = $getKode;
+        return $no_surat;
+
+    }
+
+    public function getRomawi(){
+        $month = date('n');
+
+        switch ($month){
+            case 1:
+                return "I";
+                break;
+            case 2:
+                return "II";
+                break;
+            case 3:
+                return "III";
+                break;
+            case 4:
+                return "IV";
+                break;
+            case 5:
+                return "V";
+                break;
+            case 6:
+                return "VI";
+                break;
+            case 7:
+                return "VII";
+                break;
+            case 8:
+                return "VIII";
+                break;
+            case 9:
+                return "IX";
+                break;
+            case 10:
+                return "X";
+                break;
+            case 11:
+                return "XI";
+                break;
+            default:
+                return "XII";
+                break;
+        }
     }
 
 }
