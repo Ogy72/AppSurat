@@ -50,7 +50,6 @@
                             <a class="nav-link a-clr dropdown-toggle active" data-toggle="dropdown" href="#">Buat Surat</a>
                             <div class="dropdown-menu ">
                                 <a class="dropdown-item text-danger" href="index.php?menu=BuatSurat&jenis=suratQu">A.Quotation</a>
-                                <a class="dropdown-item text-danger" href="index.php?menu=BuatSurat&jenis=suratPo">B.Purchase Order</a>
                                 <a class="dropdown-item text-danger" href="index.php?menu=BuatSurat&jenis=suratInv">C.Invoice</a>
                                 <a class="dropdown-item text-danger" href="index.php?menu=BuatSurat&jenis=suratBa">D.Berita Acara </a>
                             </div>
@@ -113,6 +112,7 @@
     </div>
 
     <!-- link js -->
+    <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
