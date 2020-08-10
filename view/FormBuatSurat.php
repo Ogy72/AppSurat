@@ -86,10 +86,7 @@
                         $instansi = $msuk->melihatInstansi();
                         switch ($jenis_surat){
                             case "suratQu":
-                                echo "Surat Quotation";
-                                break;
-                            case "suratPo":
-                                echo "Surat Purchase Order";
+                                include_once "view/TemplateQuotation.php";
                                 break;
                             case "suratInv":
                                 include_once "view/TemplateInvoice.php";

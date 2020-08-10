@@ -26,10 +26,18 @@
                     <td width='22%'>$d[perihal]</td>
                     <td width='17%'>$d[nm_instansi]</td>
                     <td width='15%'>$d[nama_lengkap]</td>
-                    <td width='13%'>
+                    <td width='13%'>";
+                    if(!empty($d["file"])){
+                        echo "
                         <a href='file/SuratKeluar/$d[file]' target='_blank' class='btn btn-success btn-sm'>View</a>
                         <a href='index.php?menu=FormSuratKeluar&key=$d[no_surat]&form=edit' class='btn btn-warning btn-sm'>Edit</a>
-                        <a href='index.php?menu=FormSuratKeluar&key=$d[no_surat]&form=hapus' class='btn btn-danger btn-sm'>Hapus</a>
+                        <a href='index.php?menu=FormSuratKeluar&key=$d[no_surat]&form=hapus' class='btn btn-danger btn-sm'>Hapus</a>";
+                    } else{
+                        echo "
+                        <a href='index.php?menu=FormSuratKeluar&key=$d[no_surat]&form=edit' class='btn btn-warning btn-sm'>Edit</a>
+                        <a href='index.php?menu=FormSuratKeluar&key=$d[no_surat]&form=hapus' class='btn btn-danger btn-sm'>Hapus</a>";
+                    }
+                    echo"
                     </td>
                 </tr>";
                 $no++;

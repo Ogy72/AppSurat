@@ -191,7 +191,7 @@
                                             <input class='form-check-input' type='checkbox' id='inputInstansi'>
                                             <label class='form-check-label'>Input Instansi Baru</label>
                                         </div>
-                                        <input type='text' name='kd_instansi_new' class='form-control form-control-sm' id='kd_instansi' required placeholder='Masukkan Kode Intansi'>
+                                        <input type='text' name='kd_instansi_new' class='form-control form-control-sm' id='kd_instansi' required placeholder='Masukkan Kode Instansi'>
                                     </div>
                                     <div class='form-group col-4 pt-4'>
                                         <input type='text' name='nm_instansi' class='form-control form-control-sm' id='nm_instansi' required placeholder='Masukkan Nama Instansi'>

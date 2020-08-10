@@ -162,13 +162,7 @@ class ManajemenSuratKeluar{
         $suk = new SuratKeluar();
         $data = $suk->queryMax($char);
         $getKode = $data['numer'];
-
-        if($getKode){
-            $nilai = substr($getKode, 4, 1);
-            $kode = (int) $nilai;
-
-            $kode++;
-            $year = date('Y');
+        $year = date('Y');
             $dayDate = date('d-m');
             if($dayDate == "1-1"){
                 $kode = 1;
@@ -176,6 +170,13 @@ class ManajemenSuratKeluar{
             $split = "/";
             $month = $this->getRomawi();
             $company = "ARV";
+
+        if($getKode){
+            $nilai = substr($getKode, 4, 1);
+            $kode = (int) $nilai;
+
+            $kode++;
+            
             $getKode = $char.sprintf("%03s",$kode).$split.$company.$split.$month.$split.$year;
 
         } else{
