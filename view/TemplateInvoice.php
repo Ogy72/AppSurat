@@ -102,8 +102,12 @@
             </div>
             <div class='row mb-2 mt-3'>
                 <div class='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center'>
-                    <a class='btn btn-danger btn-sm w-25' href='index.php?menu=BuatSurat&jenis=suratInv'>Batal</a>
-                    <input type='submit' name='create' class='btn btn-success btn-sm w-25 create' id='' value='Buat Surat'>
+                    <div class='form-check mb-2 pl-5'>
+                        <input class='form-check-input' type='checkbox' id='validasi'>
+                        <label class='form-check-label'>Data yang saya masukkan telah sesuai</label>
+                    </div>
+                    <a class='btn btn-danger btn-sm' href='index.php?menu=BuatSurat&jenis=suratInv'>Batal</a>
+                    <input type='submit' name='create' class='btn btn-success btn-sm w-25 create' id='buatSurat' value='Buat Surat'>
                 </div>
             </div>
         </form>
@@ -130,9 +134,9 @@
 
     <script>
         $(document).ready(function() {
-           $(".create").click(function(){
-                setTimeout(function(){
-                    window.location = "index.php?menu=FormSuratKeluar&key=<?php echo $no_surat?>&form=edit"},
+            $(".create").click(function() {
+                setTimeout(function() {
+                        window.location = "index.php?menu=FormSuratKeluar&key=<?php echo $no_surat ?>&form=edit"},
                     1500);
             });
 
@@ -148,23 +152,29 @@
             });
 
             /*disable form intansi*/
-            $("#kd_instansi").prop("disabled", true);
+            $("#buatSurat").prop("disabled", true);
             $("#nm_instansi").prop("disabled", true);
             $("#alamat").prop("disabled", true);
             $("#pic").prop("disabled", true);
 
             /*enable when checkbox clicked*/
-            $("#inputInstansi").click(function(){
-                if($(this).prop("checked") == true){
-                    $("#kd_instansi").prop("disabled", false);
+            $("#inputInstansi").click(function() {
+                if ($(this).prop("checked") == true) {
                     $("#nm_instansi").prop("disabled", false);
                     $("#alamat").prop("disabled", false);
                     $("#pic").prop("disabled", false);
-                } else if($(this).prop("checked") == false){
-                    $("#kd_instansi").prop("disabled", true);
+                } else if ($(this).prop("checked") == false) {
                     $("#nm_instansi").prop("disabled", true);
                     $("#alamat").prop("disabled", true);
                     $("#pic").prop("disabled", true);
+                }
+            });
+
+            $("#validasi").click(function(){
+                if($(this).prop("checked") == true){
+                    $("#buatSurat").prop("disabled", false);
+                } else {
+                    $("#buatSurat").prop("disabled", true);
                 }
             });
         })
