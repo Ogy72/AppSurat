@@ -5,7 +5,7 @@ include_once "model/Instansi.php";
 
 class ManajemenSuratKeluar{
 
-    public function buatSurat($no_surat, $tgl_surat, $perihal, $sifat, $kd_instansi, $file, $id_user, $kd_instansi_new, $nm_instansi, $pic, $alamat){
+    public function buatSurat($no_surat, $tgl_surat, $perihal, $sifat, $kd_instansi, $file, $id_user, $nm_instansi, $pic, $alamat){
         $suk = new SuratKeluar();
         $ins = new Instansi();
 
@@ -16,13 +16,14 @@ class ManajemenSuratKeluar{
         $suk->setFile($file);
         $suk->setIdUser($id_user);
 
-        if(!empty($kd_instansi_new)){    
-            $ins->setKdInstansi($kd_instansi_new);
+        if(!empty($nm_instansi)){    
+            $kdInst = $ins->getKode();
+            $ins->setKdInstansi($kdInst);
             $ins->setNmInstansi($nm_instansi);
             $ins->setAlamat($alamat);
             $ins->setPic($pic);
             $ins->queryInputInstansi();
-            $suk->setKdInstansi($kd_instansi_new);
+            $suk->setKdInstansi($kdInst);
             $suk->queryInputSuratKeluar();
         } else{
             $suk->setKdInstansi($kd_instansi);
@@ -30,7 +31,7 @@ class ManajemenSuratKeluar{
         }
     }
 
-    public function inputSuratKeluar($no_surat, $tgl_surat, $sifat, $perihal, $kd_instansi, $file, $kd_instansi_new, $nm_instansi, $pic, $alamat, $tmp, $id_user){
+    public function inputSuratKeluar($no_surat, $tgl_surat, $sifat, $perihal, $kd_instansi, $file, $nm_instansi, $pic, $alamat, $tmp, $id_user){
         $suk = new SuratKeluar();
         $ins = new Instansi();
 
@@ -47,13 +48,14 @@ class ManajemenSuratKeluar{
         } else{
             $upload = $this->uploadFile($file, $tmp);
             if($upload === true){
-                if(!empty($kd_instansi_new)){
-                    $ins->setKdInstansi($kd_instansi_new);
+                if(!empty($nm_instansi)){
+                    $kdInst = $ins->getKode();
+                    $ins->setKdInstansi($kdInst);
                     $ins->setNmInstansi($nm_instansi);
                     $ins->setAlamat($alamat);
                     $ins->setPic($pic);
                     $ins->queryInputInstansi();
-                    $suk->setKdInstansi($kd_instansi_new);
+                    $suk->setKdInstansi($kdInst);
                     $suk->queryInputSuratKeluar();
                 } else{
                     $suk->setKdInstansi($kd_instansi);
@@ -83,7 +85,7 @@ class ManajemenSuratKeluar{
         return $suk->queryMencariSuratKeluar();
     }
 
-    public function editSuratKeluar($no_surat, $no_suratx, $tgl_surat, $perihal, $sifat, $kd_instansi, $file, $filex, $kd_instansi_new, $nm_instansi, $pic, $alamat, $tmp){
+    public function editSuratKeluar($no_surat, $no_suratx, $tgl_surat, $perihal, $sifat, $kd_instansi, $file, $filex, $nm_instansi, $pic, $alamat, $tmp){
         $suk = new SuratKeluar();
         $ins = new Instansi();
 
@@ -99,13 +101,14 @@ class ManajemenSuratKeluar{
             unlink($file_for_delete); //delete file
             $upload = $this->uploadFile($file, $tmp);
             if($upload === true){
-                if(!empty($kd_instansi_new)){
-                    $ins->setKdInstansi($kd_instansi_new);
+                if(!empty($nm_instansi)){
+                    $kdInst = $ins->getKode();
+                    $ins->setKdInstansi($kdInst);
                     $ins->setNmInstansi($nm_instansi);
                     $ins->setAlamat($alamat);
                     $ins->setPic($pic);
                     $ins->queryInputInstansi();
-                    $suk->setKdInstansi($kd_instansi_new);
+                    $suk->setKdInstansi($kdInst);
                     $suk->queryEditSuratKeluar();
                 } else{
                     $suk->setKdInstansi($kd_instansi);
@@ -116,13 +119,14 @@ class ManajemenSuratKeluar{
             }
         } else{
             $suk->setFile($filex);
-            if(!empty($kd_instansi_new)){
-                $ins->setKdInstansi($kd_instansi_new);
+            if(!empty($nm_instansi)){
+                $kdInst = $ins->getKode();
+                $ins->setKdInstansi($kdInst);
                 $ins->setNmInstansi($nm_instansi);
                 $ins->setAlamat($alamat);
                 $ins->setPic($pic);
                 $ins->queryInputInstansi();
-                $suk->setKdInstansi($kd_instansi_new);
+                $suk->setKdInstansi($kdInst);
                 $suk->queryEditSuratKeluar();
             } else{
                 $suk->setKdInstansi($kd_instansi);

@@ -53,7 +53,7 @@ class SuratKeluar{
     public function queryMelihatSuratKeluar($search){
         $kdb = new KoneksiDb();
         $query = "SELECT surat_keluar.*, instansi.nm_instansi, user.nama_lengkap FROM surat_keluar, instansi, user
-        WHERE surat_keluar.kd_instansi=instansi.kd_instansi AND surat_keluar.username=user.username AND surat_keluar.perihal LIKE '%$search%' ORDER BY surat_keluar.tgl_surat DESC";
+        WHERE surat_keluar.kd_instansi=instansi.kd_instansi AND surat_keluar.username=user.username AND surat_keluar.perihal LIKE '%$search%' ORDER BY surat_keluar.no_surat DESC";
         return $kdb->execute($query);
     }
     

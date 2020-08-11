@@ -43,13 +43,17 @@ function terbilang($nilai) {
 
 if(isset($_POST["create"])){
     /*error handle*/
-    if(empty($_POST["kd_instansi_new"])){
-        $kd_instansi_new = "";
+    if(empty($_POST["nm_instansi"])){
         $nm_instansi = "";
-        $pic = "";
-        $alamat = "";
+        $ins = new Instansi();
+        $ins->setKdInstansi($_POST["kd_instansi"]);
+        $instansi = $ins->queryMencariInstansi();
+
+        $pelanggan = $instansi["nm_instansi"];
+        $pic = $instansi["pic"];
+        $alamat = $instansi["alamat"];
     } else{
-        $kd_instansi_new = $_POST["kd_instansi_new"];
+        $pelanggan = $_POST["nm_instansi"];
         $nm_instansi = $_POST["nm_instansi"];
         $pic = $_POST["pic"];
         $alamat = $_POST["alamat"];
@@ -57,7 +61,7 @@ if(isset($_POST["create"])){
    
     $no_invoice = $_POST["no_invoice"];
     $msuk = new ManajemenSuratKeluar();
-    $msuk->buatSurat($no_invoice, $_POST["tgl_invoice"], $_POST["pekerjaan"], "UMUM", $_POST["kd_instansi"], "", "ayunda919", $kd_instansi_new, $nm_instansi, $pic, $alamat);
+    $msuk->buatSurat($no_invoice, $_POST["tgl_invoice"], $_POST["pekerjaan"], "UMUM", $_POST["kd_instansi"], "", "ayunda919", $nm_instansi, $pic, $alamat);
 
     $deskripsi = $_POST["deskripsi"];
     $qty = $_POST["qty"];
@@ -68,10 +72,6 @@ if(isset($_POST["create"])){
     $tax = 0;
     $total = 0;
     $no = 1;
-
-    $ins = new Instansi();
-    $ins->setKdInstansi($_POST["kd_instansi"]);
-    $instansi = $ins->queryMencariInstansi();
 
 $content .="
    <html>
@@ -118,16 +118,25 @@ $content .="
            <tr>
                <td style='border-left:solid 1'>Pelanggan</td>
                <td>:</td>
-               <td>$instansi[nm_instansi]</td>
+               <td>$pelanggan</td>
                <td></td>
                <td>Jatuh Tempo</td>
                <td>:</td>
                <td style='border-right:solid 1'>".date('d-m-Y', strtotime($_POST['tempo']))."</td>
            </tr>
            <tr>
+               <td style='border-left:solid 1'valign='top'>PIC</td>
+               <td valign='top'>:</td>
+               <td>$pic</td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td style='border-right:solid 1'></td>
+           </tr>
+           <tr>
                <td style='border-left:solid 1'valign='top'>Alamat</td>
                <td valign='top'>:</td>
-               <td>$instansi[alamat]</td>
+               <td>$alamat</td>
                <td></td>
                <td></td>
                <td></td>

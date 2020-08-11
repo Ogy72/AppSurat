@@ -5,7 +5,7 @@ include_once "model/Instansi.php";
 
 class ManajemenSuratMasuk{
 
-    public function inputSuratMasuk($no_surat, $tgl_surat, $tgl_diterima, $perihal, $sifat, $kd_instansi, $file, $kd_instansi_new, $nm_instansi, $pic, $alamat, $tmp){
+    public function inputSuratMasuk($no_surat, $tgl_surat, $tgl_diterima, $perihal, $sifat, $kd_instansi, $file, $nm_instansi, $pic, $alamat, $tmp){
         $sum = new SuratMasuk();
         $ins = new Instansi();
 
@@ -22,13 +22,14 @@ class ManajemenSuratMasuk{
         } else{
             $upload = $this->uploadFile($file, $tmp);
             if($upload === true){
-                if(!empty($kd_instansi_new)){
-                    $ins->setKdInstansi($kd_instansi_new);
+                if(!empty($nm_instansi)){
+                    $kdInst = $ins->getKode();
+                    $ins->setKdInstansi($kdInst);
                     $ins->setNmInstansi($nm_instansi);
                     $ins->setAlamat($alamat);
                     $ins->setPic($pic);
                     $ins->queryInputInstansi();
-                    $sum->setKdInstansi($kd_instansi_new);
+                    $sum->setKdInstansi($kdInst);
                     $sum->queryInputSuratMasuk();
                 } else{
                     $sum->setKdInstansi($kd_instansi);
@@ -58,7 +59,7 @@ class ManajemenSuratMasuk{
         return $sum->queryMencariSuratMasuk();
     }
 
-    public function editSuratMasuk($no_surat, $no_suratx, $tgl_surat, $tgl_diterima, $perihal, $sifat, $kd_instansi, $file, $filex, $kd_instansi_new, $nm_instansi, $pic, $alamat, $tmp){
+    public function editSuratMasuk($no_surat, $no_suratx, $tgl_surat, $tgl_diterima, $perihal, $sifat, $kd_instansi, $file, $filex, $nm_instansi, $pic, $alamat, $tmp){
         $sum = new SuratMasuk();
         $ins = new Instansi();
 
@@ -76,12 +77,13 @@ class ManajemenSuratMasuk{
             $upload = $this->uploadFile($file, $tmp);
             if($upload === true){
                 if(!empty($kd_instansi_new)){
-                    $ins->setKdInstansi($kd_instansi_new);
+                    $kdInst = $ins->getKode();
+                    $ins->setKdInstansi($kdInst);
                     $ins->setNmInstansi($nm_instansi);
                     $ins->setAlamat($alamat);
                     $ins->setPic($pic);
                     $ins->queryInputInstansi();
-                    $sum->setKdInstansi($kd_instansi_new);
+                    $sum->setKdInstansi($kdInst);
                     $sum->queryEditSuratMasuk();
                 } else{
                     $sum->setKdInstansi($kd_instansi);
@@ -92,13 +94,14 @@ class ManajemenSuratMasuk{
             }
         } else{
             $sum->setFile($filex);
-            if(!empty($kd_instansi_new)){
-                $ins->setKdInstansi($kd_instansi_new);
+            if(!empty($nm_instansi)){
+                $kdInst = $ins->getKode();
+                $ins->setKdInstansi($kdInst);
                 $ins->setNmInstansi($nm_instansi);
                 $ins->setAlamat($alamat);
                 $ins->setPic($pic);
                 $ins->queryInputInstansi();
-                $sum->setKdInstansi($kd_instansi_new);
+                $sum->setKdInstansi($kdInst);
                 $sum->queryEditSuratMasuk();
             } else{
                 $sum->setKdInstansi($kd_instansi);

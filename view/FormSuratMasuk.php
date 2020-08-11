@@ -5,13 +5,11 @@
         $action = $_POST["action"];
 
         /*error handle*/
-        if(empty($_POST["kd_instansi_new"])){
-            $kd_instansi_new = "";
+        if(empty($_POST["nm_instansi"])){
             $nm_instansi = "";
             $pic = "";
             $alamat = "";
         } else{
-            $kd_instansi_new = $_POST["kd_instansi_new"];
             $nm_instansi = $_POST["nm_instansi"];
             $pic = $_POST["pic"];
             $alamat = $_POST["alamat"];
@@ -19,10 +17,10 @@
        
         switch ($action){
             case "Simpan":
-                $result = $msum->inputSuratMasuk($_POST["no_surat"], $_POST["tgl_surat"], $_POST["tgl_diterima"], $_POST["perihal"], $_POST["sifat"], $_POST["kd_instansi"], $_FILES['berkas']['name'], $kd_instansi_new, $nm_instansi, $pic, $alamat, $_FILES['berkas']['tmp_name']);
+                $result = $msum->inputSuratMasuk($_POST["no_surat"], $_POST["tgl_surat"], $_POST["tgl_diterima"], $_POST["perihal"], $_POST["sifat"], $_POST["kd_instansi"], $_FILES['berkas']['name'], $nm_instansi, $pic, $alamat, $_FILES['berkas']['tmp_name']);
                 break;
             case "Ubah":
-                $result = $msum->editSuratMasuk($_POST["no_surat"],$_POST["no_suratx"], $_POST["tgl_surat"], $_POST["tgl_diterima"], $_POST["perihal"], $_POST["sifat"], $_POST["kd_instansi"], $_FILES['berkas']['name'], $_POST['filex'], $kd_instansi_new, $nm_instansi, $pic, $alamat, $_FILES['berkas']['tmp_name']);
+                $result = $msum->editSuratMasuk($_POST["no_surat"],$_POST["no_suratx"], $_POST["tgl_surat"], $_POST["tgl_diterima"], $_POST["perihal"], $_POST["sifat"], $_POST["kd_instansi"], $_FILES['berkas']['name'], $_POST['filex'], $nm_instansi, $pic, $alamat, $_FILES['berkas']['tmp_name']);
                 break;
             case "Hapus":
                 $msum->hapusSuratMasuk($_POST["no_surat"], $_POST["berkas"]);
@@ -165,7 +163,7 @@
                                         <select name='kd_instansi' class='form-control form-control-sm'>
                                             <option value='$data[kd_instansi]'>$data[nm_instansi]</option>";
                                             foreach($instansi as $ins){
-                                                if($data[kd_instansi] == $ins[kd_instansi]){
+                                                if($data["kd_instansi"] == $ins["kd_instansi"]){
                                                     continue;
                                                 } else{
                                                     echo"
@@ -186,17 +184,14 @@
                                     </div>
                                 </div>
                                 <div class='form-row'>
-                                    <div class='form-group col-4'>    
+                                    <div class='form-group col-6'>    
                                         <div class='form-check'>
                                             <input class='form-check-input' type='checkbox' id='inputInstansi'>
                                             <label class='form-check-label'>Input Instansi Baru</label>
                                         </div>
-                                        <input type='text' name='kd_instansi_new' class='form-control form-control-sm' id='kd_instansi' required placeholder='Masukkan Kode Instansi'>
-                                    </div>
-                                    <div class='form-group col-4 pt-4'>
                                         <input type='text' name='nm_instansi' class='form-control form-control-sm' id='nm_instansi' required placeholder='Masukkan Nama Instansi'>
                                     </div>
-                                    <div class='form-group col-4 pt-4'>
+                                    <div class='form-group col-6 pt-4'>
                                         <input type='text' name='pic' class='form-control form-control-sm' id='pic' required placeholder='Masukkan PIC'>
                                     </div>
                                 </div>
@@ -328,17 +323,14 @@
                                     </div>
                                 </div>
                                 <div class='form-row'>
-                                    <div class='form-group col-4'>    
+                                    <div class='form-group col-6'>    
                                         <div class='form-check'>
                                             <input class='form-check-input' type='checkbox' id='inputInstansi'>
                                             <label class='form-check-label'>Input Instansi Baru</label>
                                         </div>
-                                        <input type='text' name='kd_instansi_new' class='form-control form-control-sm' id='kd_instansi' required placeholder='Masukkan Kode Intansi'>
-                                    </div>
-                                    <div class='form-group col-4 pt-4'>
                                         <input type='text' name='nm_instansi' class='form-control form-control-sm' id='nm_instansi' required placeholder='Masukkan Nama Instansi'>
                                     </div>
-                                    <div class='form-group col-4 pt-4'>
+                                    <div class='form-group col-6 pt-4'>
                                         <input type='text' name='pic' class='form-control form-control-sm' id='pic' required placeholder='Masukkan PIC'>
                                     </div>
                                 </div>
@@ -391,7 +383,6 @@
         $(document).ready(function(){
             /*disable form intansi*/
             $("#file").prop("disabled", true);
-            $("#kd_instansi").prop("disabled", true);
             $("#nm_instansi").prop("disabled", true);
             $("#alamat").prop("disabled", true);
             $("#pic").prop("disabled", true);
@@ -399,12 +390,10 @@
             /*enable when checkbox clicked*/
             $("#inputInstansi").click(function(){
                 if($(this).prop("checked") == true){
-                    $("#kd_instansi").prop("disabled", false);
                     $("#nm_instansi").prop("disabled", false);
                     $("#alamat").prop("disabled", false);
                     $("#pic").prop("disabled", false);
                 } else if($(this).prop("checked") == false){
-                    $("#kd_instansi").prop("disabled", true);
                     $("#nm_instansi").prop("disabled", true);
                     $("#alamat").prop("disabled", true);
                     $("#pic").prop("disabled", true);

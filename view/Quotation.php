@@ -45,13 +45,17 @@ function terbilang($nilai)
 
 if (isset($_POST["create"])) {
     /*error handle*/
-    if (empty($_POST["kd_instansi_new"])) {
-        $kd_instansi_new = "";
+    if (empty($_POST["nm_instansi"])) {
         $nm_instansi = "";
-        $pic = "";
-        $alamat = "";
+        $ins = new Instansi();
+        $ins->setKdInstansi($_POST["kd_instansi"]);
+        $instansi = $ins->queryMencariInstansi();
+
+        $pelanggan = $instansi["nm_instansi"];
+        $pic = $instansi["pic"];
+        $alamat = $instansi["alamat"];
     } else {
-        $kd_instansi_new = $_POST["kd_instansi_new"];
+        $pelanggan = $_POST["nm_instansi"];
         $nm_instansi = $_POST["nm_instansi"];
         $pic = $_POST["pic"];
         $alamat = $_POST["alamat"];
@@ -64,8 +68,10 @@ if (isset($_POST["create"])) {
     }
 
     $no_surat = $_POST["no_surat"];
+    $ext = ".pdf";
+    $no_surat_new = str_replace("/","_",$no_surat).$ext;
     $msuk = new ManajemenSuratKeluar();
-    //$msuk->buatSurat($no_invoice, $_POST["tgl_invoice"], $_POST["pekerjaan"], "UMUM", $_POST["kd_instansi"], "", "ayunda919", $kd_instansi_new, $nm_instansi, $pic, $alamat);
+    $msuk->buatSurat($no_surat, $_POST["tgl_surat"], $_POST["pekerjaan"], "UMUM", $_POST["kd_instansi"], $no_surat_new, "ayunda919", $nm_instansi, $pic, $alamat);
 
     $deskripsi = $_POST["deskripsi"];
     $qty = $_POST["qty"];
@@ -77,12 +83,8 @@ if (isset($_POST["create"])) {
     $total = 0;
     $no = 1;
 
-    $ins = new Instansi();
-    $ins->setKdInstansi($_POST["kd_instansi"]);
-    $instansi = $ins->queryMencariInstansi();
-
     $content .= "
-   <html>
+    <html>
        <table cellspacing='0'>
            <tr>
                <td style='border-bottom:solid 1'><img src='../img/logo.png' width='85px' height='75px'></td>
@@ -111,17 +113,17 @@ if (isset($_POST["create"])) {
            <tr>
                <td width='150px'>Kepada YTH</td>
                <td width='5px'>:</td>
-               <td width='600px' colspan='5'>$instansi[nm_instansi]</td>
+               <td width='600px' colspan='5'>$pelanggan</td>
            </tr>
            <tr>
                <td valign='top'>Alamat</td>
                <td width='5px'>:</td>
-               <td colspan='5'>$instansi[alamat]</td>
+               <td colspan='5'>$alamat</td>
            </tr>
            <tr>
                <td >PIC</td>
                <td >:</td>
-               <td colspan='5'>$instansi[pic]</td>
+               <td colspan='5'>$pic</td>
            </tr>
            <tr>
                <td valign='top'>Pekerjaan</td>
@@ -144,29 +146,29 @@ if (isset($_POST["create"])) {
                            <td align='center'>Qty</td>
                            <td align='center'>Satuan</td>
                        </tr>";
-            foreach ($deskripsi as $key => $c) {
-                $totalHarga = $qty[$key] * $harga[$key];
-                $hargaRp = "Rp." . number_format($harga[$key], 0, ',', '.');
-                $totalHargaRp = "Rp." . number_format($totalHarga, 0, ',', '.');
-                $content .= "
-                            <tr>
-                                <td align='center'>$no</td>
-                                <td>$deskripsi[$key]</td>
-                                <td align='center'>$qty[$key]</td>
-                                <td align='center'>$satuan[$key]</td>
-                                <td>$hargaRp</td>
-                                <td>$totalHargaRp</td>
-                            </tr>";
-                $subtotal = $subtotal + $totalHarga;
-                $subtotalRp = "Rp." . number_format($subtotal, 0, ',', '.');
-                $tax = ($subtotal * 10) / 100;
-                $taxRp = "Rp." . number_format($tax, 0, ',', '.');
-                $total = $subtotal + $tax;
-                $totalRp = "Rp." . number_format($total, 0, ',', '.');
-                $no++;
-            }
-            $content .= "
-                       <tr>
+                        foreach ($deskripsi as $key => $c) {
+                            $totalHarga = $qty[$key] * $harga[$key];
+                            $hargaRp = "Rp." . number_format($harga[$key], 0, ',', '.');
+                            $totalHargaRp = "Rp." . number_format($totalHarga, 0, ',', '.');
+                            $content .= "
+                                        <tr>
+                                            <td align='center'>$no</td>
+                                            <td>$deskripsi[$key]</td>
+                                            <td align='center'>$qty[$key]</td>
+                                            <td align='center'>$satuan[$key]</td>
+                                            <td>$hargaRp</td>
+                                            <td>$totalHargaRp</td>
+                                        </tr>";
+                            $subtotal = $subtotal + $totalHarga;
+                            $subtotalRp = "Rp." . number_format($subtotal, 0, ',', '.');
+                            $tax = ($subtotal * 10) / 100;
+                            $taxRp = "Rp." . number_format($tax, 0, ',', '.');
+                            $total = $subtotal + $tax;
+                            $totalRp = "Rp." . number_format($total, 0, ',', '.');
+                            $no++;
+                        }
+                        $content .= "
+                        <tr>
                            <td colspan='5'>Sub Total</td>
                            <td>$subtotalRp</td>
                        </tr>
@@ -226,13 +228,14 @@ if (isset($_POST["create"])) {
                 <td colspan='3'></td>
            </tr>
        </table>
-   </html>";
+    </html>";
 
     require_once "../mpdf/mpdf.php";
     $mpdf = new mPDF();
     $mpdf->AddPage("P", "", "", "", "", "5", "5", "5", "5", "", "", "", "", "", "", "", "", "", "", "", "A4");
     $mpdf->WriteHTML($content);
-    $mpdf->Output($no_surat . ".pdf", 'I');
+    $mpdf->Output("../file/SuratKeluar/$no_surat_new", 'F');
+    $mpdf->Output($no_surat_new, 'I');
 } else {
     echo "error";
 }

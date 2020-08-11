@@ -44,5 +44,28 @@ class Instansi{
         return $result->fetch_array();
     }
 
+    public function getKode(){
+        $kdb = new KoneksiDb();
+        $query = "SELECT MAX(kd_instansi) AS kd FROM instansi";
+        $result = $kdb->execute($query);
+        $data = $result->fetch_array();
+        $getKode = $data['kd'];
+
+        if($getKode){
+            $nilai = substr($getKode, 6, 1);
+            $kode = (int) $nilai;
+
+            $kode++;
+            $char = "Inst";
+            $getKode = $char.sprintf("%03s",$kode);
+        } else{
+            $getKode = "Inst001";
+        }
+
+        $kdInst = $getKode;
+        return $kdInst;
+
+    }
+
 }
 ?>

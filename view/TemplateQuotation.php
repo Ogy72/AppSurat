@@ -37,17 +37,14 @@
                         </div>
                     </div>
                     <div class='form-row'>
-                        <div class='form-group col-4'>
+                        <div class='form-group col-6'>
                             <div class='form-check'>
                                 <input class='form-check-input' type='checkbox' id='inputInstansi'>
                                 <label class='form-check-label'>Input Instansi Baru</label>
                             </div>
-                            <input type='text' name='kd_instansi_new' class='form-control form-control-sm' id='kd_instansi' required placeholder='Masukkan Kode Intansi'>
-                        </div>
-                        <div class='form-group col-4 pt-4'>
                             <input type='text' name='nm_instansi' class='form-control form-control-sm' id='nm_instansi' required placeholder='Masukkan Nama Instansi'>
                         </div>
-                        <div class='form-group col-4 pt-4'>
+                        <div class='form-group col-6 pt-4'>
                             <input type='text' name='pic' class='form-control form-control-sm' id='pic' required placeholder='Masukkan PIC'>
                         </div>
                     </div>
@@ -130,12 +127,11 @@
 
     <script>
         $(document).ready(function() {
-           /* $(".create").click(function() {
+           $(".create").click(function() {
                 setTimeout(function() {
-                        window.location = "index.php?menu=FormSuratKeluar&key=<?php echo $no_surat ?>&form=edit"
-                    },
-                    2000);
-            });*/
+                        window.location = "index.php?menu=SuratKeluarAdmin"},
+                    1500);
+            });
 
             $(".hide").hide();
 
