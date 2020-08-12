@@ -80,7 +80,7 @@
         <div class="row">
             <!-- isi Konten -->
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 konten">
-                <div class="row mt-3 mr-1 ml-1 mb-1 bg-light">
+                <div class="row mt-3 mr-1 ml-1 mb-1">
                     <?php
                         $msuk = new ManajemenSuratKeluar();
                         $instansi = $msuk->melihatInstansi();
@@ -92,7 +92,7 @@
                                 include_once "view/TemplateInvoice.php";
                                 break;
                             default:
-                                echo "Berita Acara";
+                            include_once "view/TemplateBeritaAcara.php";
                                 break;
                         }
                     ?>

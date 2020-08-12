@@ -5,23 +5,23 @@
     <div class='col-12 surat-scroll'>
         <div class='row'>
             <div class='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center'>
-                <h3>Invoice</h3>
+                <h3>Berita Acara</h3>
             </div>
         </div>
-        <form action='view/Invoice.php' method='post' target='_blank'>
+        <form action='view/BeritaAcara.php' method='post' target='_blank'>
             <div class='row'>
                 <div class='col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6'>
                     <div class='form-row'>
                         <div class='form-group col-4'>
                             <?php
-                            $no_surat = $msuk->getKode("C.");
+                            $no_surat = $msuk->getKode("D.");
                             ?>
-                            <label for='no_invoice'>No Invoice</label>
-                            <input type='text' name='no_invoice' class='form-control form-control-sm' value="<?php echo $no_surat ?>" readonly required>
+                            <label for='no_surat'>No Surat</label>
+                            <input type='text' name='no_surat' class='form-control form-control-sm' value="<?php echo $no_surat ?>" readonly required>
                         </div>
                         <div class='form-group col-4'>
-                            <label for='tgl_invoice'>Tanggal Invoice</label>
-                            <input type='date' name='tgl_invoice' class='form-control form-control-sm' placeholder='Tanggal' required>
+                            <label for='tgl_surat'>Tanggal Surat</label>
+                            <input type='date' name='tgl_surat' class='form-control form-control-sm' placeholder='Tanggal' required>
                         </div>
                         <div class='form-group col-4'>
                             <label for='Pelanggan'>Pelanggan</label>
@@ -56,44 +56,33 @@
                 </div>
                 <div class='col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6'>
                     <div class='form-row'>
-                        <div class='form-group col-4'>
-                            <label for='no_po'>PO No</label>
-                            <input type='text' name='nopo' class='form-control form-control-sm' placeholder='Nomor PO'>
-                        </div>
-                        <div class='form-group col-4'>
-                            <label for='tgl_PO'>Tanggal PO</label>
-                            <input type='date' name='tgl_po' class='form-control form-control-sm'>
-                        </div>
-                        <div class='form-group col-4'>
-                            <label for='temp'>Jatuh Tempo</label>
-                            <input type='date' name='tempo' class='form-control form-control-sm'>
-                        </div>
-                    </div>
-                    <div class='form-row pt-4'>
-                        <div class='form-group col-12'>
-                            <input type='text' name='pekerjaan' class='form-control form-control-sm' placeholder='Masukkan Pekerjaan' required>
+                        <div class='form-group col-6'>
+                            <label>No Surat PO</label>
+                            <input type='text' name='no_po' class='form-control form-control-sm' placeholder='Masukkan No Surat' >
                         </div>
                     </div>
                     <div class='form-row'>
-                        <div class='form-group col-9'>
-                            <input type='text' name='bank_rek' class='form-control form-control-sm' placeholder='Masukkan Bank & No Rekening' required>
-                        </div>
-                        <div class='col-3 text-right mb-2'>
-                            <a class='add-more btn btn-primary btn-sm text-light'>Tambah Item</a>
+                        <div class='form-group col-12'>
+                            <label>Pekerjaan</label>
+                            <input type='text' name='pekerjaan' class='form-control form-control-sm' placeholder='Masukkan Pekerjaan'>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-12 text-right mb-2">
+                    <a class='add-more btn btn-primary btn-sm text-light'>Tambah Item Barang</a>
+                </div>
+            </div>
             <div class='row'>
                 <div class='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12'>
                     <table class='table table-bordered table-sm mb-0'>
                         <thead class='thead-dark'>
                             <tr>
-                                <th width='50%'>Deskripsi</th>
-                                <th width='10%'>Qty</th>
+                                <th width='50%'>Nama Barang</th>
                                 <th width='15%'>Satuan</th>
-                                <th width='25%'>Harga Satuan</th>
+                                <th width='25%'>Jumlah</th>
                             </tr>
                         </thead>
                     </table>
@@ -106,7 +95,7 @@
                         <input class='form-check-input' type='checkbox' id='validasi'>
                         <label class='form-check-label'>Data yang saya masukkan telah sesuai</label>
                     </div>
-                    <a class='btn btn-danger btn-sm' href='index.php?menu=BuatSurat&jenis=suratInv'>Batal</a>
+                    <a class='btn btn-danger btn-sm' href='index.php?menu=BuatSurat&jenis'>Batal</a>
                     <input type='submit' name='create' class='btn btn-success btn-sm w-25 create' id='buatSurat' value='Buat Surat'>
                 </div>
             </div>
@@ -119,10 +108,9 @@
             <table class='table table-bordered table-sm mb-0'>
                 <tbody class="bg-white">
                     <tr>
-                        <td width='50%'><input type='text' name="deskripsi[]" class='form-control-tabel' placeholder='Masukkan Deskripsi'></td>
-                        <td width='10%'><input type='text' name="qty[]" class='form-control-tabel' placeholder='Masukkan Qty'></td>
+                        <td width='50%'><input type='text' name="barang[]" class='form-control-tabel' placeholder='Masukkan Barang'></td>
                         <td width='15%'><input type='text' name="satuan[]" class='form-control-tabel' placeholder='Masukkan Satuan'></td>
-                        <td width='25%'><input type='text' name="harga[]" class='form-control-tabel' placeholder='Masukkan Harga'></td>
+                        <td width='25%'><input type='text' name="jumlah[]" class='form-control-tabel' placeholder='Masukkan Jumlah'></td>
                     </tr>
                 </tbody>
             </table>
@@ -134,9 +122,9 @@
 
     <script>
         $(document).ready(function() {
-            $(".create").click(function() {
+           $(".create").click(function() {
                 setTimeout(function() {
-                        window.location = "index.php?menu=FormSuratKeluar&key=<?php echo $no_surat ?>&form=edit"},
+                        window.location = "index.php?menu=SuratKeluarAdmin"},
                     1500);
             });
 

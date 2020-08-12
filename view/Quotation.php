@@ -129,6 +129,7 @@ if (isset($_POST["create"])) {
                <td valign='top'>Pekerjaan</td>
                <td valign='top'>:</td>
                <td colspan='5'>$_POST[pekerjaan]</td>
+            </tr>
            <tr>
                <td colspan='7' height='20px'></td>
            </tr>
@@ -239,3 +240,4 @@ if (isset($_POST["create"])) {
 } else {
     echo "error";
 }
+?>

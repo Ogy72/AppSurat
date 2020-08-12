@@ -80,7 +80,7 @@
             <div class='row'>
                 <div class='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12'>
                     <table class='table table-bordered table-sm mb-0'>
-                        <thead class='thead-light'>
+                        <thead class='thead-dark'>
                             <tr>
                                 <th width='50%'>Deskripsi</th>
                                 <th width='10%'>Qty</th>
@@ -109,7 +109,7 @@
     <div class='copy hide'>
         <div class='control-group input-group'>
             <table class='table table-bordered table-sm mb-0'>
-                <tbody>
+                <tbody class="bg-white">
                     <tr>
                         <td width='50%'><input type='text' name="deskripsi[]" class='form-control-tabel' placeholder='Masukkan Deskripsi'></td>
                         <td width='10%'><input type='text' name="qty[]" class='form-control-tabel' placeholder='Masukkan Qty'></td>
