@@ -89,5 +89,11 @@ class SuratKeluar{
         return $result->fetch_array();
     }
 
+    public function queryLaporan($tgl1, $tgl2, $filter){
+        $kdb = new KoneksiDb();
+        $query = "SELECT * FROM surat_keluar WHERE tgl_surat BETWEEN '$tgl1' AND '$tgl2' AND no_surat LIKE '%$filter%'";
+        return $kdb->execute($query);
+    }
+
 }
 ?>

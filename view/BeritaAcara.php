@@ -33,8 +33,7 @@ function penyebut($nilai)
     return $temp;
 }
 
-function bulan()
-{
+function bulan(){
     $month = date('n');
 
     switch ($month) {

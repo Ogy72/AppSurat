@@ -17,13 +17,30 @@ class Laporan{
         include_once "view/GrafikSurat.php";
     }
 
-    public function cetakLaporan(){
+    public function cetakLaporan($tgl1, $tgl2){
+        $suk = new SuratKeluar();
+        $sum = new SuratMasuk();
+        $suratKeluar = mysqli_num_rows($suk->queryLaporan($tgl1, $tgl2, ""));
+        $suratMasuk = mysqli_num_rows($sum->queryLaporan($tgl1, $tgl2));
+        $aSuk = mysqli_num_rows($suk->queryLaporan($tgl1, $tgl2, "A."));
+        $cSuk = mysqli_num_rows($suk->queryLaporan($tgl1, $tgl2, "C."));
+        $dSuk = mysqli_num_rows($suk->queryLaporan($tgl1, $tgl2, "D."));
+        $sumSurat= $aSuk+$cSuk+$dSuk;
 
+        return array($suratKeluar, $suratMasuk, $aSuk, $cSuk, $dSuk, $sumSurat);
     }
 
-    public function rekapSuratMasuk(){
-        $nilai = "Rekap Surat Masuk";
-        include_once "view/RekapSuratMasuk.php";
+    public function rekapSurat($tgl1, $tgl2){
+        $suk = new SuratKeluar();
+        $sum = new SuratMasuk();
+        $suratKeluar = mysqli_num_rows($suk->queryLaporan($tgl1, $tgl2, ""));
+        $suratMasuk = mysqli_num_rows($sum->queryLaporan($tgl1, $tgl2));
+        $aSuk = mysqli_num_rows($suk->queryLaporan($tgl1, $tgl2, "A."));
+        $cSuk = mysqli_num_rows($suk->queryLaporan($tgl1, $tgl2, "C."));
+        $dSuk = mysqli_num_rows($suk->queryLaporan($tgl1, $tgl2, "D."));
+        $sumSurat= $aSuk+$cSuk+$dSuk;
+        include_once "view/RekapSurat.php";
+
     }
 }
 

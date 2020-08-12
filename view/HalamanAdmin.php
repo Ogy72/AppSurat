@@ -97,13 +97,6 @@
                                         <label for="tanggal2">Sampai Tanggal</label>
                                         <input type="date" name="tanggal2" class="form-control form-control-sm" required>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="laporan">Jenis Laporan</label>
-                                        <select name="laporan" class="form-control form-control-sm">
-                                            <option value="surat_masuk">Surat Masuk</option>
-                                            <option value="surat_keluar">Surat Keluar</option>
-                                        </select>
-                                    </div>
                                     <input type="submit" name="action" value="Submit" class="btn btn-success btn-sm w-100">
                                 </form>
                             </div>
@@ -116,22 +109,15 @@
                     
                     $lap = new Laporan();
                     if(isset($_POST["action"])){
-                        $laporan = $_POST["laporan"];
-
-                        switch ($laporan){
-                            case "surat_masuk":
-                                $lap->rekapSuratMasuk();
-                                break;
-                            default:
-                                echo "error";
-                                break;
-                        }
+                        $lap->rekapSurat($_POST["tanggal1"], $_POST["tanggal2"]);
                     } else{
                         $lap->melihatGrafikSurat();
                     }
                 ?>
                 </div>
+
             </div>
+
         </div>
 
         <!-- Footer -->

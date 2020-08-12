@@ -82,5 +82,11 @@ class SuratMasuk{
         return $kdb->execute($query);
     }
 
+    public function queryLaporan($tgl1, $tgl2){
+        $kdb = new KoneksiDb();
+        $query = "SELECT * FROM surat_masuk WHERE tgl_diterima BETWEEN '$tgl1' AND '$tgl2'";
+        return $kdb->execute($query);
+    }
+
 }
 ?>
