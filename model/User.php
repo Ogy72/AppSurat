@@ -63,7 +63,7 @@ class User{
 
     public function queryCekLogin(){
         $kdb = new KoneksiDb();
-        $query = "SELECT * FROM user WHERE username='$this->username' AND password='$this->password'";
+        $query = "SELECT * FROM user WHERE username='$this->username'";
         $result = $kdb->execute($query);
         return $result->fetch_array();
     }

@@ -71,7 +71,7 @@ if (isset($_POST["create"])) {
     $ext = ".pdf";
     $no_surat_new = str_replace("/","_",$no_surat).$ext;
     $msuk = new ManajemenSuratKeluar();
-    $msuk->buatSurat($no_surat, $_POST["tgl_surat"], $_POST["pekerjaan"], "UMUM", $_POST["kd_instansi"], $no_surat_new, "ayunda919", $nm_instansi, $pic, $alamat);
+    $msuk->buatSurat($no_surat, $_POST["tgl_surat"], $_POST["pekerjaan"], "UMUM", $_POST["kd_instansi"], $no_surat_new, $_COOKIE["user"], $nm_instansi, $pic, $alamat);
 
     $deskripsi = $_POST["deskripsi"];
     $qty = $_POST["qty"];

@@ -117,7 +117,7 @@ if (isset($_POST["create"])) {
     } else{
         $pekerjaan = $_POST["pekerjaan"];
     }
-    $msuk->buatSurat($no_surat, $_POST["tgl_surat"], $pekerjaan, "UMUM", $_POST["kd_instansi"], "", "ayunda919", $nm_instansi, $pic, $alamat);
+    $msuk->buatSurat($no_surat, $_POST["tgl_surat"], $pekerjaan, "UMUM", $_POST["kd_instansi"], "", $_COOKIE["user"], $nm_instansi, $pic, $alamat);
 
     if (empty($_POST["barang"])) {
 

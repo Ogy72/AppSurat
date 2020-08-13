@@ -1,4 +1,5 @@
 <?php
+include_once "controller/Validasi.php";
 include_once "controller/ManajemenSuratMasuk.php";
 include_once "controller/ManajemenSuratKeluar.php";
 include_once "controller/ManajemenAkun.php";
@@ -7,7 +8,7 @@ include_once "controller/Laporan.php";
 class Antarmuka{
 
     public function halamanLogin(){
-
+        include_once "view/HalamanLogin.php";
     }
 
     public function halamanAdmin(){

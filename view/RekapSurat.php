@@ -44,7 +44,7 @@
 						<tbody class="bg-primary text-white text-center">
 							<td><?php echo $aSuk ?></td>
 							<td><?php echo $cSuk ?></td>
-							<td><?php echo $dSuk ?></td>
+							<td><?php echo $eSuk ?></td>
 							<td><?php echo $sumSurat ?></td>
 						</tbody>
 					</table>

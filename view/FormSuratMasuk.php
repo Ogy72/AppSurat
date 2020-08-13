@@ -85,7 +85,7 @@
                             <div class="dropdown-menu ">
                                 <a class="dropdown-item text-danger" href="index.php?menu=BuatSurat&jenis=suratQu">A.Quotation</a>
                                 <a class="dropdown-item text-danger" href="index.php?menu=BuatSurat&jenis=suratInv">C.Invoice</a>
-                                <a class="dropdown-item text-danger" href="index.php?menu=BuatSurat&jenis=suratBa">D.Berita Acara </a>
+                                <a class="dropdown-item text-danger" href="index.php?menu=BuatSurat&jenis=suratBa">E.Berita Acara </a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -94,9 +94,14 @@
                         <li class="nav-item">
                             <a class="a-clr nav-link" href="index.php?menu=SuratKeluarAdmin">Surat Keluar</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="a-clr nav-link" href="index.php?menu=ManajemenAkun">Manajemen Akun</a>
-                        </li>
+                        <?php
+                            if($_COOKIE["level"] == "Super Admin"){
+                                echo '
+                                <li class="nav-item">
+                                    <a class="a-clr nav-link" href="index.php?menu=ManajemenAkun">Manajemen Akun</a>
+                                </li>';
+                            }
+                        ?>
                         <li class="nav-item">
                             <a class="a-clr nav-link" href="index.php?menu=logout">Logout</a>
                         </li>

@@ -130,7 +130,7 @@ include_once "../controller/Laporan.php";
                 <div class="col-7 ">
                 </div>
                 <div class="col-3 text-center">
-                    Admin,
+                    <?php echo $_COOKIE["nama"] ?>,
                 </div>
                 <div class="col-1"> <!-- margin right--></div>
             </div>

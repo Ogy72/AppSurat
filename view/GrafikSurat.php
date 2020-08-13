@@ -54,7 +54,7 @@
                             echo $aSuk;
                         ?>, //Data Surat Quatation
                         <?php
-                            echo $dSuk;
+                            echo $eSuk;
                         ?>, //Data Surat Berita Acara
                         <?php
                             echo $cSuk;

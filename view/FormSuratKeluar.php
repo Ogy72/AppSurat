@@ -17,7 +17,7 @@
        
         switch ($action){
             case "Simpan":
-                $result = $msuk->inputSuratKeluar($_POST["no_surat"], $_POST["tgl_surat"], $_POST["sifat"], $_POST["perihal"], $_POST["kd_instansi"], $_FILES['berkas']['name'], $nm_instansi, $pic, $alamat, $_FILES['berkas']['tmp_name'], $_POST['id_user']);
+                $result = $msuk->inputSuratKeluar($_POST["no_surat"], $_POST["tgl_surat"], $_POST["sifat"], $_POST["perihal"], $_POST["kd_instansi"], $_FILES['berkas']['name'], $nm_instansi, $pic, $alamat, $_FILES['berkas']['tmp_name'], $_COOKIE['user']);
                 break;
             case "Ubah":
                 $result = $msuk->editSuratKeluar($_POST["no_surat"], $_POST["no_suratx"], $_POST["tgl_surat"], $_POST["perihal"], $_POST["sifat"], $_POST["kd_instansi"], $_FILES['berkas']['name'], $_POST['filex'], $nm_instansi, $pic, $alamat, $_FILES['berkas']['tmp_name']);
@@ -85,7 +85,7 @@
                             <div class="dropdown-menu ">
                                 <a class="dropdown-item text-danger" href="index.php?menu=BuatSurat&jenis=suratQu">A.Quotation</a>
                                 <a class="dropdown-item text-danger" href="index.php?menu=BuatSurat&jenis=suratInv">C.Invoice</a>
-                                <a class="dropdown-item text-danger" href="index.php?menu=BuatSurat&jenis=suratBa">D.Berita Acara </a>
+                                <a class="dropdown-item text-danger" href="index.php?menu=BuatSurat&jenis=suratBa">E.Berita Acara </a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -94,9 +94,14 @@
                         <li class="nav-item">
                             <a class="a-clr nav-link active" href="index.php?menu=SuratKeluarAdmin">Surat Keluar</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="a-clr nav-link" href="index.php?menu=ManajemenAkun">Manajemen Akun</a>
-                        </li>
+                        <?php
+                            if($_COOKIE["level"] == "Super Admin"){
+                                echo '
+                                <li class="nav-item">
+                                    <a class="a-clr nav-link" href="index.php?menu=ManajemenAkun">Manajemen Akun</a>
+                                </li>';
+                            }
+                        ?>
                         <li class="nav-item">
                             <a class="a-clr nav-link" href="index.php?menu=logout">Logout</a>
                         </li>
@@ -270,7 +275,6 @@
                                         <h5 class='text-white font-weight-light text-uppercase font-weight-bold mt-2 mb-2 text-center'>
                                             Form Input Surat Keluar
                                         </h5>
-                                        <input type='hidden' name='id_user' value='ayunda919'>
                                     </div>
                                 </div>
                                 <div class='form-row'>

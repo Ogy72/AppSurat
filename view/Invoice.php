@@ -61,7 +61,7 @@ if(isset($_POST["create"])){
    
     $no_invoice = $_POST["no_invoice"];
     $msuk = new ManajemenSuratKeluar();
-    $msuk->buatSurat($no_invoice, $_POST["tgl_invoice"], $_POST["pekerjaan"], "UMUM", $_POST["kd_instansi"], "", "ayunda919", $nm_instansi, $pic, $alamat);
+    $msuk->buatSurat($no_invoice, $_POST["tgl_invoice"], $_POST["pekerjaan"], "UMUM", $_POST["kd_instansi"], "", $_COOKIE["user"], $nm_instansi, $pic, $alamat);
 
     $deskripsi = $_POST["deskripsi"];
     $qty = $_POST["qty"];

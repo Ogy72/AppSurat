@@ -14,7 +14,7 @@
                     <div class='form-row'>
                         <div class='form-group col-4'>
                             <?php
-                            $no_surat = $msuk->getKode("D.");
+                            $no_surat = $msuk->getKode("E.");
                             ?>
                             <label for='no_surat'>No Surat</label>
                             <input type='text' name='no_surat' class='form-control form-control-sm' value="<?php echo $no_surat ?>" readonly required>
@@ -56,15 +56,15 @@
                 </div>
                 <div class='col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6'>
                     <div class='form-row'>
-                        <div class='form-group col-6'>
+                        <div class='form-group col-8'>
                             <label>No Surat PO</label>
-                            <input type='text' name='no_po' class='form-control form-control-sm' placeholder='Masukkan No Surat' >
+                            <input type='text' name='no_po' class='form-control form-control-sm' placeholder='Masukkan No Surat (Khusus Berita Acara Hasil Pekerjaan)' >
                         </div>
                     </div>
                     <div class='form-row'>
                         <div class='form-group col-12'>
                             <label>Pekerjaan</label>
-                            <input type='text' name='pekerjaan' class='form-control form-control-sm' placeholder='Masukkan Pekerjaan'>
+                            <input type='text' name='pekerjaan' class='form-control form-control-sm' placeholder='Masukkan Pekerjaan (Khusus Berita Acara Hasil Pekerjaan)'>
                         </div>
                     </div>
                 </div>
