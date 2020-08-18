@@ -52,7 +52,7 @@ class Instansi{
         $getKode = $data['kd'];
 
         if($getKode){
-            $nilai = substr($getKode, 6, 1);
+            $nilai = substr($getKode, 4, 3);
             $kode = (int) $nilai;
 
             $kode++;
