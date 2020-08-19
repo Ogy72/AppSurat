@@ -18,13 +18,16 @@
         <?php
             $no = 1;
             foreach($data as $d){
+            $ins = new Instansi();
+            $ins->setKdInstansi($d["kd_instansi"]);
+            $instansi = $ins->queryMencariInstansi();
             echo"
                 <tr>
                     <td width='3%'>$no</td>
                     <td width='17%'>$d[no_surat]</td>
                     <td width='13%'>$d[tgl_surat]</td>
                     <td width='13%'>$d[tgl_diterima]</td>
-                    <td width='17%'>$d[nm_instansi]</td>
+                    <td width='17%'>$instansi[nm_instansi]</td>
                     <td width='24%'>$d[perihal]</td>
                     <td width='13%'>
                         <a href='file/SuratMasuk/$d[file]' target='_blank' class='btn btn-success btn-sm'>View</a>

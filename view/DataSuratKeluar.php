@@ -18,14 +18,20 @@
         <?php
             $no = 1;
             foreach($data as $d){
+            $ins = new Instansi();
+            $usr = new User();
+            $ins->setKdInstansi($d["kd_instansi"]);
+            $usr->setUsername($d["username"]);
+            $instansi = $ins->queryMencariInstansi();
+            $user = $usr->queryMencariAkun();
             echo"
                 <tr>
                     <td width='3%'>$no</td>
                     <td width='17%'>$d[no_surat]</td>
                     <td width='13%'>$d[tgl_surat]</td>
                     <td width='22%'>$d[perihal]</td>
-                    <td width='17%'>$d[nm_instansi]</td>
-                    <td width='15%'>$d[nama_lengkap]</td>
+                    <td width='17%'>$instansi[nm_instansi]</td>
+                    <td width='15%'>$user[nama_lengkap]</td>
                     <td width='13%'>";
                     if(!empty($d["file"])){
                         echo "

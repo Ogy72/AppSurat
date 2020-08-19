@@ -52,8 +52,7 @@ class SuratMasuk{
 
     public function queryMelihatSuratMasuk($search){
         $kdb = new KoneksiDb();
-        $query = "SELECT surat_masuk.*, instansi.nm_instansi FROM surat_masuk, instansi 
-        WHERE surat_masuk.kd_instansi=instansi.kd_instansi AND surat_masuk.perihal LIKE '%$search%' ORDER BY surat_masuk.tgl_diterima DESC";
+        $query = "SELECT * FROM surat_masuk WHERE no_surat LIKE '%$search%' OR tgl_surat LIKE '%$search%' OR tgl_diterima LIKE '%$search%' OR perihal LIKE '%$search%'";
         return $kdb->execute($query);
     }
     

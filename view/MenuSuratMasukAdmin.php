@@ -88,9 +88,9 @@
                     <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 pl-1">
                         <h5 class="text-white font-weight-light text-uppercase font-weight-bold">Daftar Surat Masuk</h5>
                     </div>
-                    <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 pl-5 pr-0">
+                    <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 pl-0 pr-0">
                         <form action="" method="post" class="form-inline pr-0 mr-0">
-                            <input type="text" name="key" class="form-control form-control-sm" placeholder="Masukkan Perihal">
+                            <input type="text" name="key" class="form-control form-control-sm" placeholder="Kata Kunci">
                             <input type="submit" name="search" value="Search" class="btn btn-success btn-sm ml-2">
                             <a href="index.php?menu=FormSuratMasuk&form=input&key" class="btn btn-primary btn-sm ml-3">Input Surat Masuk</a>
                         </form>

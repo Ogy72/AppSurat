@@ -52,8 +52,7 @@ class SuratKeluar{
 
     public function queryMelihatSuratKeluar($search){
         $kdb = new KoneksiDb();
-        $query = "SELECT surat_keluar.*, instansi.nm_instansi, user.nama_lengkap FROM surat_keluar, instansi, user
-        WHERE surat_keluar.kd_instansi=instansi.kd_instansi AND surat_keluar.username=user.username AND surat_keluar.perihal LIKE '%$search%' ORDER BY surat_keluar.no_surat DESC";
+        $query = "SELECT * FROM surat_keluar WHERE no_surat LIKE '%$search%' OR tgl_surat LIKE '%$search%' OR perihal LIKE '%$search%'";
         return $kdb->execute($query);
     }
     
@@ -82,9 +81,9 @@ class SuratKeluar{
         return $kdb->execute($query);
     }
 
-    public function queryMax($char){
+    public function queryMax(){
         $kdb = new KoneksiDb();
-        $query = "SELECT MAX(no_surat) AS numer FROM surat_keluar WHERE no_surat LIKE '%$char%'";
+        $query = "SELECT MAX(no_surat) AS numer FROM surat_keluar";
         $result = $kdb->execute($query);
         return $result->fetch_array();
     }

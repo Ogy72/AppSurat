@@ -2,6 +2,7 @@
 
 include_once "model/SuratKeluar.php";
 include_once "model/Instansi.php";
+include_once "model/User.php";
 
 class ManajemenSuratKeluar{
 
@@ -71,6 +72,13 @@ class ManajemenSuratKeluar{
     public function melihatSuratKeluar($search){
         $suk = new SuratKeluar();
         $data = $suk->queryMelihatSuratKeluar($search);
+        include_once "view/DataSuratKeluar.php";
+    }
+
+
+    public function pencarian($search){
+        $suk = new SuratKeluar();
+        $data = $suk->queryPencarian($search);
         include_once "view/DataSuratKeluar.php";
     }
 
@@ -164,7 +172,7 @@ class ManajemenSuratKeluar{
 
     public function getKode($char){
         $suk = new SuratKeluar();
-        $data = $suk->queryMax($char);
+        $data = $suk->queryMax();
         $getKode = $data['numer'];
         $year = date('Y');
             $dayDate = date('d-m');
@@ -176,7 +184,7 @@ class ManajemenSuratKeluar{
             $company = "ARV";
 
         if($getKode){
-            $nilai = substr($getKode, 4, 1);
+            $nilai = substr($getKode, 2, 3);
             $kode = (int) $nilai;
 
             $kode++;
