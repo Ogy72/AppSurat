@@ -83,7 +83,7 @@ class SuratKeluar{
 
     public function queryMax(){
         $kdb = new KoneksiDb();
-        $query = "SELECT MAX(no_surat) AS numer FROM surat_keluar";
+        $query = "SELECT MAX(MID(no_surat,3,3)) AS numer FROM surat_keluar";
         $result = $kdb->execute($query);
         return $result->fetch_array();
     }

@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(0);
 include_once "../controller/ManajemenSuratKeluar.php";
 include_once "../model/SuratKeluar.php";
 include_once "../model/Instansi.php";

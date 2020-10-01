@@ -97,7 +97,7 @@
                                 include_once "view/TemplateInvoice.php";
                                 break;
                             default:
-                            include_once "view/TemplateBeritaAcara.php";
+                                include_once "view/TemplateBeritaAcara.php";
                                 break;
                         }
                     ?>

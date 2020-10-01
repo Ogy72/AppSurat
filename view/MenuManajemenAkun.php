@@ -89,10 +89,10 @@
                     <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 pl-1">
                         <h5 class="text-white font-weight-light text-uppercase font-weight-bold">Daftar Akun</h5>
                     </div>
-                    <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 pl-5">
-                        <form action="" method="post" class="form-inline pl-4">
+                    <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 pl-4">
+                        <form action="" method="post" class="form-inline">
                             <input type="text" name="key" class="form-control form-control-sm" placeholder="Kata Kunci">
-                            <input type="submit" name="search" value="Search" class="btn btn-success btn-sm ml-2">
+                            <input type="submit" name="search" value="Search" class="btn btn-success btn-sm ml-1">
                         </form>
                     </div>
                     <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 text-right pr-1">

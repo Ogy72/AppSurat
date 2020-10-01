@@ -91,7 +91,7 @@
                     <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 pl-0 pr-0">
                         <form action="" method="post" class="form-inline pr-0 mr-0">
                             <input type="text" name="key" class="form-control form-control-sm" placeholder="Kata Kunci">
-                            <input type="submit" name="search" value="Search" class="btn btn-success btn-sm ml-2">
+                            <input type="submit" name="search" value="Search" class="btn btn-success btn-sm ml-1">
                             <a href="index.php?menu=FormSuratMasuk&form=input&key" class="btn btn-primary btn-sm ml-3">Input Surat Masuk</a>
                         </form>
                         
