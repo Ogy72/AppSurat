@@ -184,7 +184,7 @@ class ManajemenSuratKeluar{
             $company = "ARV";
 
         if($getKode){
-            $nilai = substr($getKode, 2, 3);
+            $nilai = substr($getKode, 0, 3);
             $kode = (int) $nilai;
 
             $kode++;

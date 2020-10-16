@@ -3,12 +3,12 @@
         <thead class="thead-light text-sm">
             <tr>
                 <th width="3%">No</th>
-                <th width="17%">Nomor Surat</th>
+                <th width="15%">Nomor Surat</th>
                 <th width="13%">Tanggal Surat</th>
                 <th width="22%">Perihal</th>
                 <th width="17%">Untuk Instansi</th>
                 <th width="15%">Dibuat Oleh</th>
-                <th width="13%">Pilihan</th>
+                <th width="15%">Pilihan</th>
             </tr>
         </thead>
     </table>
@@ -27,12 +27,12 @@
             echo"
                 <tr>
                     <td width='3%'>$no</td>
-                    <td width='17%'>$d[no_surat]</td>
+                    <td width='15%'>$d[no_surat]</td>
                     <td width='13%'>$d[tgl_surat]</td>
                     <td width='22%'>$d[perihal]</td>
                     <td width='17%'>$instansi[nm_instansi]</td>
                     <td width='15%'>$user[nama_lengkap]</td>
-                    <td width='13%'>";
+                    <td width='15%'>";
                     if(!empty($d["file"])){
                         echo "
                         <a href='file/SuratKeluar/$d[file]' target='_blank' class='btn btn-success btn-sm'>View</a>
